@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "projects": {
+    "cqquestions": {
+      "projectType": "application",
+      "root": "apps/cqquestions",
+      "sourceRoot": "apps/cqquestions/src",
+      "prefix": "cq",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/cqquestions",
+            "index": "apps/cqquestions/src/index.html",
+            "main": "apps/cqquestions/src/main.ts",
+            "polyfills": "apps/cqquestions/src/polyfills.ts",
+            "tsConfig": "apps/cqquestions/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/cqquestions/src/favicon.ico",
+              "apps/cqquestions/src/assets"
+            ],
+            "styles": ["apps/cqquestions/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/cqquestions/src/environments/environment.ts",
+                  "with": "apps/cqquestions/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "cqquestions:build:production"
+            },
+            "development": {
+              "browserTarget": "cqquestions:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "cqquestions:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/cqquestions/src/**/*.ts",
+              "apps/cqquestions/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/cqquestions"],
+          "options": {
+            "jestConfig": "apps/cqquestions/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "cqquestions-e2e": {
+      "root": "apps/cqquestions-e2e",
+      "sourceRoot": "apps/cqquestions-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/cqquestions-e2e/cypress.json",
+            "devServerTarget": "cqquestions:serve:development",
+            "tsConfig": "apps/cqquestions-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cqquestions:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/cqquestions-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "packageManager": "npm"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "cqquestions"
+}
