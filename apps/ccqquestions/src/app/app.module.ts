@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
 import { firebase, FirebaseUIModule } from 'firebaseui-angular';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -84,7 +85,9 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatSnackBarModule,
     MatToolbarModule,
     MatFabMenuModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxUiLoaderModule,
+    NgxUiLoaderRouterModule
   ],
   providers: [
     {
