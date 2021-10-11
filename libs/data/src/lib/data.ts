@@ -10,6 +10,8 @@ export interface Question {
   answers: Answer[];
 }
 
+export const QUESTIONS_PER_PAGE = 40;
+
 export const TEMPLATE_QUESTION: Question = {
   index: 1,
   value: '',

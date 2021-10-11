@@ -10,7 +10,9 @@ import {
   redirectUnauthorizedTo
 } from '@angular/fire/auth-guard';
 import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import {
@@ -18,9 +20,11 @@ import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS
 } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFabMenuModule } from '@angular-material-extensions/fab-menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
 import { firebase, FirebaseUIModule } from 'firebaseui-angular';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -72,11 +76,15 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     TextFieldModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatExpansionModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatRadioModule,
     MatSnackBarModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatFabMenuModule,
+    NgxPaginationModule
   ],
   providers: [
     {

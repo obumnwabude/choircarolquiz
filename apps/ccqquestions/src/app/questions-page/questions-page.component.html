@@ -1,18 +1,59 @@
-<mat-toolbar>
-  <span>Choir Quiz Questions</span>
-  <span class="spacer"></span>
-  <button
-    mat-ripple
-    mat-raised-button
-    (click)="signOut()"
-    aria-label="Sign Out"
-  >
-    <span>Sign Out</span>
-  </button>
-</mat-toolbar>
+<div id="app-container">
+  <mat-toolbar>
+    <span>Choir Quiz Questions</span>
+    <span class="spacer"></span>
+    <button
+      mat-ripple
+      mat-raised-button
+      (click)="signOut()"
+      aria-label="Sign Out"
+    >
+      <span>Sign Out</span>
+    </button>
+  </mat-toolbar>
 
-<main>
-  <ccq-question-form [(question)]="question"></ccq-question-form>
+  <main>
+    <pagination-controls
+      (pageChange)="changePage($event)"
+    ></pagination-controls>
 
-  <div>{{ question | json }}</div>
-</main>
+    <div>
+      <button mat-button (click)="accordion.openAll()">Expand All</button>
+      <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+    </div>
+
+    <mat-accordion multi>
+      <mat-expansion-panel
+        *ngFor="
+          let question of questions.reverse()
+            | paginate
+              : {
+                  itemsPerPage: maxQPP,
+                  currentPage: pageNumber,
+                  totalItems: questionCount
+                };
+          first as isFirst
+        "
+        [expanded]="isFirst"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Question {{ question.index }} </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <ccq-question-form
+          [question]="question"
+          (questionChange)="firestore.saveQuestion($event)"
+        >
+        </ccq-question-form>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-fab-menu
+      color="primary"
+      [fabButtons]="fabButtons"
+      color="primary"
+      (onFabMenuItemSelected)="fabAction($event)"
+    >
+    </mat-fab-menu>
+  </main>
+</div>

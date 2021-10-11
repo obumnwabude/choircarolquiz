@@ -1,3 +1,44 @@
+#app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  max-width: 1408px;
+  margin: 0 auto;
+}
+
 main {
-  padding: 16px;
+  padding: 24px;
+  max-width: 1408px;
+  margin: 48px auto 0;
+  flex: 1 1 auto;
+}
+
+pagination-controls {
+  margin-bottom: 16px;
+}
+
+mat-fab-menu {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+}
+
+@media (min-width: 1408px) {
+  mat-toolbar,
+  main {
+    border-left: 5px solid black;
+    border-right: 5px solid black;
+  }
+
+  mat-fab-menu {
+    right: calc(((100% - 1408px) / 2) + 32px);
+  }
 }
