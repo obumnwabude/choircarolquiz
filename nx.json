@@ -1,5 +1,5 @@
 {
-  "npmScope": "choirquiz",
+  "npmScope": "choircarolquiz",
   "affected": {
     "defaultBase": "main"
   },
@@ -27,12 +27,12 @@
     ]
   },
   "projects": {
-    "cqquestions": {
+    "ccqquestions": {
       "tags": []
     },
-    "cqquestions-e2e": {
+    "ccqquestions-e2e": {
       "tags": [],
-      "implicitDependencies": ["cqquestions"]
+      "implicitDependencies": ["ccqquestions"]
     }
   }
 }

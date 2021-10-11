@@ -1,29 +1,29 @@
 {
   "version": 1,
   "projects": {
-    "cqquestions": {
+    "ccqquestions": {
       "projectType": "application",
-      "root": "apps/cqquestions",
-      "sourceRoot": "apps/cqquestions/src",
-      "prefix": "cq",
+      "root": "apps/ccqquestions",
+      "sourceRoot": "apps/ccqquestions/src",
+      "prefix": "ccq",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/apps/cqquestions",
-            "index": "apps/cqquestions/src/index.html",
-            "main": "apps/cqquestions/src/main.ts",
-            "polyfills": "apps/cqquestions/src/polyfills.ts",
-            "tsConfig": "apps/cqquestions/tsconfig.app.json",
+            "outputPath": "dist/apps/ccqquestions",
+            "index": "apps/ccqquestions/src/index.html",
+            "main": "apps/ccqquestions/src/main.ts",
+            "polyfills": "apps/ccqquestions/src/polyfills.ts",
+            "tsConfig": "apps/ccqquestions/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "apps/cqquestions/src/favicon.ico",
-              "apps/cqquestions/src/assets"
+              "apps/ccqquestions/src/favicon.ico",
+              "apps/ccqquestions/src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "apps/cqquestions/src/styles.scss"
+              "apps/ccqquestions/src/styles.scss"
             ],
             "scripts": []
           },
@@ -43,8 +43,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "apps/cqquestions/src/environments/environment.ts",
-                  "with": "apps/cqquestions/src/environments/environment.prod.ts"
+                  "replace": "apps/ccqquestions/src/environments/environment.ts",
+                  "with": "apps/ccqquestions/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "cqquestions:build:production"
+              "browserTarget": "ccqquestions:build:production"
             },
             "development": {
-              "browserTarget": "cqquestions:build:development"
+              "browserTarget": "ccqquestions:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,43 +75,43 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cqquestions:build"
+            "browserTarget": "ccqquestions:build"
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "apps/cqquestions/src/**/*.ts",
-              "apps/cqquestions/src/**/*.html"
+              "apps/ccqquestions/src/**/*.ts",
+              "apps/ccqquestions/src/**/*.html"
             ]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/cqquestions"],
+          "outputs": ["coverage/apps/ccqquestions"],
           "options": {
-            "jestConfig": "apps/cqquestions/jest.config.js",
+            "jestConfig": "apps/ccqquestions/jest.config.js",
             "passWithNoTests": true
           }
         }
       }
     },
-    "cqquestions-e2e": {
-      "root": "apps/cqquestions-e2e",
-      "sourceRoot": "apps/cqquestions-e2e/src",
+    "ccqquestions-e2e": {
+      "root": "apps/ccqquestions-e2e",
+      "sourceRoot": "apps/ccqquestions-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/cqquestions-e2e/cypress.json",
-            "devServerTarget": "cqquestions:serve:development",
-            "tsConfig": "apps/cqquestions-e2e/tsconfig.json"
+            "cypressConfig": "apps/ccqquestions-e2e/cypress.json",
+            "devServerTarget": "ccqquestions:serve:development",
+            "tsConfig": "apps/ccqquestions-e2e/tsconfig.json"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "cqquestions:serve:production"
+              "devServerTarget": "ccqquestions:serve:production"
             }
           }
         },
@@ -119,7 +119,7 @@
           "builder": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["apps/cqquestions-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": ["apps/ccqquestions-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -156,5 +156,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "cqquestions"
+  "defaultProject": "ccqquestions"
 }

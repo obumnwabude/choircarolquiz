@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'cq-root',
+  selector: 'ccq-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent { }
+export class AppComponent {}

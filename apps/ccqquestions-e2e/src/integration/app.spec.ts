@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('cqquestions', () => {
+describe('ccqquestions', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
@@ -8,6 +8,6 @@ describe('cqquestions', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to cqquestions!');
+    getGreeting().contains('Welcome to ccqquestions!');
   });
 });
