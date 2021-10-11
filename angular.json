@@ -21,7 +21,10 @@
               "apps/cqquestions/src/favicon.ico",
               "apps/cqquestions/src/assets"
             ],
-            "styles": ["apps/cqquestions/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/cqquestions/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
