@@ -1,0 +1,16 @@
+.question-form,
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+mat-form-field,
+mat-radio-button {
+  margin-right: 8px;
+  display: inline-block;
+}
+
+mat-radio-group {
+  margin-bottom: 32px;
+  display: inline-block;
+}

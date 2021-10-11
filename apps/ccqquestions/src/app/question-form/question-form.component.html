@@ -1,0 +1,58 @@
+<form class="question-form" [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Question</mat-label>
+    <textarea
+      matInput
+      required
+      [formControl]="questionForm.controls.value"
+    ></textarea>
+    <mat-error *ngIf="questionForm.controls.value.hasError('required')">
+      Question is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <div class="select-correct">
+    <h4>Correct Answer</h4>
+    <mat-radio-group
+      name="correct"
+      [formControl]="questionForm.controls.correct"
+    >
+      <mat-radio-button
+        *ngFor="
+          let answer of asFormArray(questionForm.controls.answers).controls
+        "
+        [value]="answer.controls.index.value"
+        color="primary"
+      >
+        {{ answer.controls.index.value }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div class="answers" formArrayName="answers">
+    <form
+      *ngFor="let answer of asFormArray(questionForm.controls.answers).controls"
+      [formGroup]="answer"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Answer {{ answer.controls.index.value }}</mat-label>
+        <input matInput required formControlName="value" />
+        <mat-error *ngIf="answer.controls.value.hasError('required')">
+          Answer {{ answer.controls.index.value }} is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <p>
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="questionForm.status === 'INVALID'"
+    >
+      Update
+    </button>
+  </p>
+</form>

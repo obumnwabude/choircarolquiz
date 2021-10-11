@@ -10,3 +10,9 @@
     <span>Sign Out</span>
   </button>
 </mat-toolbar>
+
+<main>
+  <ccq-question-form [(question)]="question"></ccq-question-form>
+
+  <div>{{ question | json }}</div>
+</main>

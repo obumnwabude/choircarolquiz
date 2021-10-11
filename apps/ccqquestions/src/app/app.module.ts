@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { TextFieldModule } from '@angular/cdk/text-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
@@ -8,8 +9,16 @@ import {
   redirectLoggedInTo,
   redirectUnauthorizedTo
 } from '@angular/fire/auth-guard';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import {
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS
+} from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
 import { firebase, FirebaseUIModule } from 'firebaseui-angular';
 
@@ -17,6 +26,7 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { QuestionsPageComponent } from './questions-page/questions-page.component';
+import { QuestionFormComponent } from './question-form/question-form.component';
 
 const routes: Route[] = [
   {
@@ -46,7 +56,12 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 };
 
 @NgModule({
-  declarations: [AppComponent, SignInComponent, QuestionsPageComponent],
+  declarations: [
+    AppComponent,
+    SignInComponent,
+    QuestionsPageComponent,
+    QuestionFormComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -54,8 +69,23 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    TextFieldModule,
+    ReactiveFormsModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSnackBarModule,
     MatToolbarModule
+  ],
+  providers: [
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 5000,
+        verticalPosition: 'top'
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })
