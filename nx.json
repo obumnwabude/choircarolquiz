@@ -33,6 +33,9 @@
     "ccqquestions-e2e": {
       "tags": [],
       "implicitDependencies": ["ccqquestions"]
+    },
+    "data": {
+      "tags": []
     }
   }
 }
