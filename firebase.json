@@ -22,5 +22,13 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "source": "dist/apps/functions",
+    "predeploy": [
+      "nx lint functions",
+      "nx build functions",
+      "node tools/scripts/build-firebase-functions-package-json.js"
+    ]
+  }
 }

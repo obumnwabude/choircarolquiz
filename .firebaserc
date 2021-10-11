@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "choircarolquiz": {
+      "hosting": {
+        "ccqquestions": [
+          "ccqquestions"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "choircarolquiz"
+  }
+}

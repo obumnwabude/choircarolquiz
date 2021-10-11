@@ -1,9 +1,0 @@
-{
-  "targets": {
-    "choircarolquiz": {
-      "hosting": {
-        "ccqquestions": ["ccqquestions"]
-      }
-    }
-  }
-}
