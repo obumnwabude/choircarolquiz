@@ -102,33 +102,6 @@
         }
       }
     },
-    "ccqquestions-e2e": {
-      "root": "apps/ccqquestions-e2e",
-      "sourceRoot": "apps/ccqquestions-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/ccqquestions-e2e/cypress.json",
-            "devServerTarget": "ccqquestions:serve:development",
-            "tsConfig": "apps/ccqquestions-e2e/tsconfig.json"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "ccqquestions:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/ccqquestions-e2e/**/*.{js,ts}"]
-          }
-        }
-      }
-    },
     "choircarolquiz": {
       "projectType": "application",
       "root": "apps/choircarolquiz",
@@ -218,32 +191,6 @@
           "options": {
             "jestConfig": "apps/choircarolquiz/jest.config.js",
             "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "choircarolquiz-e2e": {
-      "root": "apps/choircarolquiz-e2e",
-      "sourceRoot": "apps/choircarolquiz-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/choircarolquiz-e2e/cypress.json",
-            "devServerTarget": "choircarolquiz:serve:development"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "choircarolquiz:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/choircarolquiz-e2e/**/*.{js,ts}"]
           }
         }
       }
