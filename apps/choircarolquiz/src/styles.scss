@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@use '~@angular/material' as mat;
+@include mat.core();
+$ccq-primary: mat.define-palette(mat.$red-palette);
+$ccq-accent: mat.define-palette(mat.$red-palette, A200, A100, A400);
+$ccq-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $ccq-primary,
+      accent: $ccq-accent
+    )
+  )
+);
+@include mat.all-component-themes($ccq-theme);
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
