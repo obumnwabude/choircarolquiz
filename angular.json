@@ -129,6 +129,125 @@
         }
       }
     },
+    "choircarolquiz": {
+      "projectType": "application",
+      "root": "apps/choircarolquiz",
+      "sourceRoot": "apps/choircarolquiz/src",
+      "prefix": "ccq",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/choircarolquiz",
+            "index": "apps/choircarolquiz/src/index.html",
+            "main": "apps/choircarolquiz/src/main.ts",
+            "polyfills": "apps/choircarolquiz/src/polyfills.ts",
+            "tsConfig": "apps/choircarolquiz/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/choircarolquiz/src/favicon.ico",
+              "apps/choircarolquiz/src/assets"
+            ],
+            "styles": ["apps/choircarolquiz/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/choircarolquiz/src/environments/environment.ts",
+                  "with": "apps/choircarolquiz/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "choircarolquiz:build:production"
+            },
+            "development": {
+              "browserTarget": "choircarolquiz:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "choircarolquiz:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/choircarolquiz/src/**/*.ts",
+              "apps/choircarolquiz/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/choircarolquiz"],
+          "options": {
+            "jestConfig": "apps/choircarolquiz/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "choircarolquiz-e2e": {
+      "root": "apps/choircarolquiz-e2e",
+      "sourceRoot": "apps/choircarolquiz-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/choircarolquiz-e2e/cypress.json",
+            "devServerTarget": "choircarolquiz:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "choircarolquiz:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/choircarolquiz-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
     "data": {
       "root": "libs/data",
       "sourceRoot": "libs/data/src",
@@ -234,5 +353,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "ccqquestions"
+  "defaultProject": "choircarolquiz"
 }

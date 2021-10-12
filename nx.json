@@ -34,6 +34,13 @@
       "tags": [],
       "implicitDependencies": ["ccqquestions"]
     },
+    "choircarolquiz": {
+      "tags": []
+    },
+    "choircarolquiz-e2e": {
+      "tags": [],
+      "implicitDependencies": ["choircarolquiz"]
+    },
     "data": {
       "tags": []
     },
