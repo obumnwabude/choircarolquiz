@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LOCALSTORAGE_THEME_KEY } from '@ccq/data';
 import { BehaviorSubject } from 'rxjs';
 
 export const DEFAULT_THEME = 'light_mode';
@@ -11,14 +12,19 @@ export class ThemingService {
   theme$ = new BehaviorSubject(DEFAULT_THEME);
 
   constructor() {
-    window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches &&
-      this.theme$.next('dark_mode');
+    const savedTheme = localStorage.getItem(LOCALSTORAGE_THEME_KEY);
+    savedTheme
+      ? this.theme$.next(savedTheme)
+      : window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches &&
+        this.theme$.next('dark_mode');
 
     window
       .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', (e) =>
-        this.theme$.next(e.matches ? 'dark_mode' : 'light_mode')
-      );
+      .addEventListener('change', (e) => {
+        const theme = e.matches ? 'dark_mode' : 'light_mode';
+        this.theme$.next(theme);
+        localStorage.setItem(LOCALSTORAGE_THEME_KEY, theme);
+      });
   }
 }

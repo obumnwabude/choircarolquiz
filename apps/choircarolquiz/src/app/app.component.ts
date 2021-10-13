@@ -2,6 +2,7 @@ import { Component, HostBinding, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { SPINNER } from 'ngx-ui-loader';
 import { DEFAULT_THEME, ThemingService, THEMES } from './theming.service';
+import { LOCALSTORAGE_THEME_KEY } from '@ccq/data';
 
 @Component({
   selector: 'ccq-root',
@@ -30,5 +31,6 @@ export class AppComponent implements OnInit {
   changeTheme(): void {
     this.theme = THEMES.indexOf(this.theme) === 0 ? THEMES[1] : THEMES[0];
     this.theming.theme$.next(this.theme);
+    localStorage.setItem(LOCALSTORAGE_THEME_KEY, this.theme);
   }
 }

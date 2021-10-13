@@ -12,6 +12,8 @@ export interface Question {
 
 export const CANTATA_DATE = '2021-11-20T10:00:00.000Z';
 
+export const LOCALSTORAGE_THEME_KEY = 'theme';
+
 export const QUESTIONS_PER_PAGE = 40;
 
 export const TEMPLATE_QUESTION: Question = {
