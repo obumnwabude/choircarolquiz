@@ -5,6 +5,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, Routes } from '@angular/router';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
+import { ThemingModule } from '@ccq/ccq/theming';
 
 import { AppComponent } from './app.component';
 
@@ -26,7 +27,8 @@ const routes: Routes = [
     MatSidenavModule,
     MatToolbarModule,
     NgxUiLoaderModule,
-    NgxUiLoaderRouterModule
+    NgxUiLoaderRouterModule,
+    ThemingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

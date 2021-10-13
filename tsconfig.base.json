@@ -16,9 +16,10 @@
     "strictNullChecks": false,
     "baseUrl": ".",
     "paths": {
+      "@ccq/ccq/home-page": ["libs/choircarolquiz/home-page/src/index.ts"],
       "@ccq/data": ["libs/data/src/index.ts"],
-      "@ccq/ccq/home-page": [
-        "libs/choircarolquiz/home-page/src/index.ts"
+      "@ccq/ccq/theming": [
+        "libs/choircarolquiz/theming/src/index.ts"
       ]
     }
   },

@@ -217,6 +217,31 @@
         }
       }
     },
+    "choircarolquiz-theming": {
+      "projectType": "library",
+      "root": "libs/choircarolquiz/theming",
+      "sourceRoot": "libs/choircarolquiz/theming/src",
+      "prefix": "choircarolquiz",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/choircarolquiz/theming"],
+          "options": {
+            "jestConfig": "libs/choircarolquiz/theming/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/choircarolquiz/theming/src/**/*.ts",
+              "libs/choircarolquiz/theming/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "data": {
       "root": "libs/data",
       "sourceRoot": "libs/data/src",
