@@ -5,33 +5,33 @@
 >
 </ngx-ui-loader>
 
-<div id="app-container">
-  <mat-toolbar class="mat-elevation-z3">
-    <span>Christmas Cantata</span>
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <mat-toolbar class="header mat-elevation-z3">
+      <span>Christmas Cantata Quiz</span>
       <span class="spacer"></span>
       <button mat-icon-button (click)="changeTheme()" title="Switch Theme">
         <mat-icon>{{
           THEMES.indexOf(theme) === 0 ? THEMES[1] : THEMES[0]
         }}</mat-icon>
       </button>
-  </mat-toolbar>
+    </mat-toolbar>
 
-  <mat-sidenav-container>
-    <mat-sidenav-content>
+    <main>
       <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+    </main>
 
-  <mat-toolbar class="mat-elevation-z3">
-    <span class="mx-auto text-base">
-      &copy; St. Cecilia's Choir,
-      <a
-        href="https://nfcsaefunai.org"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="underline"
-        >NFCS AE-FUNAI</a
-      >.
-    </span>
-  </mat-toolbar>
-</div>
+    <mat-toolbar class="footer mat-elevation-z3">
+      <span class="mx-auto text-base">
+        &copy; St. Cecilia's Choir,
+        <a
+          href="https://nfcsaefunai.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline"
+          >NFCS AE-FUNAI</a
+        >.
+      </span>
+    </mat-toolbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>

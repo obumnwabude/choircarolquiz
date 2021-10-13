@@ -1,10 +1,35 @@
-#app-container {
+mat-sidenav-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
-mat-sidenav-container {
-  flex: 1 1 auto;
-  z-index: -1 !important;
+@media (min-width: 1400px) {
+  mat-sidenav-content {
+    margin: 0 auto;
+    border: 5px solid #000;
+  }
+
+  ::ng-deep.dark_mode mat-sidenav-content {
+    border-color: #fff;
+  }
+}
+
+mat-toolbar.header {
+  position: fixed;
+  max-width: 1390px;
+  z-index: 100;
+  margin: 0 auto;
+}
+
+main {
+  padding-top: 72px;
+  padding-bottom: 96px;
+  flex: 1 0 auto;
+}
+
+mat-toolbar.footer {
+  flex-shrink: 0;
 }

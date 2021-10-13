@@ -1,0 +1,57 @@
+mat-divider {
+  max-width: 512px;
+  margin: 0 auto;
+}
+
+.trophy-containers {
+  display: flex;
+  max-width: 512px;
+}
+
+.trophy {
+  width: 80%;
+  margin: 0 auto;
+}
+
+#gold {
+  position: relative;
+  z-index: 2;
+  order: 2;
+}
+
+#silver {
+  margin-top: 10%;
+  margin-right: -5%;
+  order: 1;
+}
+
+#bronze {
+  margin-top: 15%;
+  margin-left: -5%;
+  order: 3;
+}
+
+.trophy-base {
+  padding: 16px;
+  border-radius: 16px;
+  margin: 0 auto;
+  max-width: 192px;
+}
+
+@media (max-width: 390px) {
+  .trophy-prize {
+    font-size: 1.5rem;
+  }
+}
+
+.award-list {
+  max-width: 480px;
+}
+
+.bible-chapters {
+  max-width: 320px;
+}
+
+#register-button {
+  font-size: 1.25rem;
+}
