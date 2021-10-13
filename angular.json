@@ -192,56 +192,6 @@
         }
       }
     },
-    "choircarolquiz-home-page": {
-      "projectType": "library",
-      "root": "libs/choircarolquiz/home-page",
-      "sourceRoot": "libs/choircarolquiz/home-page/src",
-      "prefix": "choircarolquiz",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/choircarolquiz/home-page"],
-          "options": {
-            "jestConfig": "libs/choircarolquiz/home-page/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/choircarolquiz/home-page/src/**/*.ts",
-              "libs/choircarolquiz/home-page/src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
-    "choircarolquiz-theming": {
-      "projectType": "library",
-      "root": "libs/choircarolquiz/theming",
-      "sourceRoot": "libs/choircarolquiz/theming/src",
-      "prefix": "choircarolquiz",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/choircarolquiz/theming"],
-          "options": {
-            "jestConfig": "libs/choircarolquiz/theming/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/choircarolquiz/theming/src/**/*.ts",
-              "libs/choircarolquiz/theming/src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
     "data": {
       "root": "libs/data",
       "sourceRoot": "libs/data/src",

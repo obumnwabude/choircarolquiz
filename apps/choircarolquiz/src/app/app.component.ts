@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { SPINNER } from 'ngx-ui-loader';
-import { DEFAULT_THEME, ThemingService, THEMES } from '@ccq/ccq/theming';
+import { DEFAULT_THEME, ThemingService, THEMES } from './theming.service';
 
 @Component({
   selector: 'ccq-root',
@@ -10,16 +10,25 @@ import { DEFAULT_THEME, ThemingService, THEMES } from '@ccq/ccq/theming';
 })
 export class AppComponent implements OnInit {
   SPINNER = SPINNER;
-  @HostBinding('class') public cssThemeClass = DEFAULT_THEME;
+  THEMES = THEMES;
+  @HostBinding('class') public theme = DEFAULT_THEME;
 
-  constructor(public theming: ThemingService, private overlay: OverlayContainer) {}
+  constructor(
+    private overlay: OverlayContainer,
+    public theming: ThemingService
+  ) {}
 
   ngOnInit(): void {
-    this.theming.theme.subscribe((theme: string) => {
-      this.cssThemeClass = theme;
+    this.theming.theme$.subscribe((theme: string) => {
+      this.theme = theme;
       const overlayClasses = this.overlay.getContainerElement().classList;
       overlayClasses.remove(...Array.from(THEMES));
-      overlayClasses.add(this.cssThemeClass);
+      overlayClasses.add(this.theme);
     });
+  }
+
+  changeTheme(): void {
+    this.theme = THEMES.indexOf(this.theme) === 0 ? THEMES[1] : THEMES[0];
+    this.theming.theme$.next(this.theme);
   }
 }

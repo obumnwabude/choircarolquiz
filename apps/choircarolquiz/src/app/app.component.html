@@ -8,6 +8,12 @@
 <div id="app-container">
   <mat-toolbar class="mat-elevation-z3">
     <span>Christmas Cantata</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="changeTheme()" title="Switch Theme">
+        <mat-icon>{{
+          THEMES.indexOf(theme) === 0 ? THEMES[1] : THEMES[0]
+        }}</mat-icon>
+      </button>
   </mat-toolbar>
 
   <mat-sidenav-container>
