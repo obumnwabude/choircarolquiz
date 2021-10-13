@@ -5,8 +5,27 @@
 >
 </ngx-ui-loader>
 
-<mat-toolbar>
-  <span>Christmas Cantata</span>
-</mat-toolbar>
+<div id="app-container">
+  <mat-toolbar class="mat-elevation-z3">
+    <span>Christmas Cantata</span>
+  </mat-toolbar>
 
-<router-outlet></router-outlet>
+  <mat-sidenav-container>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <mat-toolbar class="mat-elevation-z3">
+    <span class="mx-auto text-base">
+      &copy; St. Cecilia's Choir,
+      <a
+        href="https://nfcsaefunai.org"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline"
+        >NFCS AE-FUNAI</a
+      >.
+    </span>
+  </mat-toolbar>
+</div>
