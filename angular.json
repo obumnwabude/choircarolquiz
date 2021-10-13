@@ -17,10 +17,7 @@
             "polyfills": "apps/ccqquestions/src/polyfills.ts",
             "tsConfig": "apps/ccqquestions/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/ccqquestions/src/favicon.ico",
-              "apps/ccqquestions/src/assets"
-            ],
+            "assets": ["apps/ccqquestions/src/assets"],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/firebaseui/dist/firebaseui.css",
@@ -118,12 +115,12 @@
             "polyfills": "apps/choircarolquiz/src/polyfills.ts",
             "tsConfig": "apps/choircarolquiz/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/choircarolquiz/src/favicon.ico",
-              "apps/choircarolquiz/src/assets"
+            "assets": ["apps/choircarolquiz/src/assets"],
+            "styles": [
+              "apps/choircarolquiz/src/assets/flipdown.min.css",
+              "apps/choircarolquiz/src/styles.scss"
             ],
-            "styles": ["apps/choircarolquiz/src/styles.scss"],
-            "scripts": []
+            "scripts": ["apps/choircarolquiz/src/assets/flipdown.js"]
           },
           "configurations": {
             "production": {
@@ -191,6 +188,31 @@
           "options": {
             "jestConfig": "apps/choircarolquiz/jest.config.js",
             "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "choircarolquiz-home-page": {
+      "projectType": "library",
+      "root": "libs/choircarolquiz/home-page",
+      "sourceRoot": "libs/choircarolquiz/home-page/src",
+      "prefix": "choircarolquiz",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/choircarolquiz/home-page"],
+          "options": {
+            "jestConfig": "libs/choircarolquiz/home-page/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/choircarolquiz/home-page/src/**/*.ts",
+              "libs/choircarolquiz/home-page/src/**/*.html"
+            ]
           }
         }
       }
