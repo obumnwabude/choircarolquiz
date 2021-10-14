@@ -4,6 +4,9 @@
       "hosting": {
         "ccqquestions": [
           "ccqquestions"
+        ],
+        "choircarolquiz": [
+          "choircarolquiz"
         ]
       }
     }
