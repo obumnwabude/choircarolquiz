@@ -1,5 +1,6 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import * as AOS from 'aos';
 import { SPINNER } from 'ngx-ui-loader';
 import { DEFAULT_THEME, ThemingService, THEMES } from './theming.service';
 import { LOCALSTORAGE_THEME_KEY } from '@ccq/data';
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    AOS.init({ duration: 2000 });
     this.theming.theme$.subscribe((theme: string) => {
       this.theme = theme;
       const overlayClasses = this.overlay.getContainerElement().classList;

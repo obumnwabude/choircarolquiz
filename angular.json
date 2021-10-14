@@ -118,6 +118,7 @@
             "assets": ["apps/choircarolquiz/src/assets"],
             "styles": [
               "apps/choircarolquiz/src/assets/flipdown.min.css",
+              "./node_modules/aos/dist/aos.css",
               "apps/choircarolquiz/src/styles.scss"
             ],
             "scripts": ["apps/choircarolquiz/src/assets/flipdown.js"]
