@@ -1,6 +1,96 @@
 {
   "version": 1,
   "projects": {
+    "ccqadmin": {
+      "projectType": "application",
+      "root": "apps/ccqadmin",
+      "sourceRoot": "apps/ccqadmin/src",
+      "prefix": "choircarolquiz",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/ccqadmin",
+            "index": "apps/ccqadmin/src/index.html",
+            "main": "apps/ccqadmin/src/main.ts",
+            "polyfills": "apps/ccqadmin/src/polyfills.ts",
+            "tsConfig": "apps/ccqadmin/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/ccqadmin/src/assets"],
+            "styles": ["apps/ccqadmin/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/ccqadmin/src/environments/environment.ts",
+                  "with": "apps/ccqadmin/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ccqadmin:build:production"
+            },
+            "development": {
+              "browserTarget": "ccqadmin:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ccqadmin:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/ccqadmin/src/**/*.ts",
+              "apps/ccqadmin/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/ccqadmin"],
+          "options": {
+            "jestConfig": "apps/ccqadmin/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "ccqquestions": {
       "projectType": "application",
       "root": "apps/ccqquestions",
@@ -19,7 +109,6 @@
             "inlineStyleLanguage": "scss",
             "assets": ["apps/ccqquestions/src/assets"],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/firebaseui/dist/firebaseui.css",
               "apps/ccqquestions/src/styles.scss"
             ],
@@ -302,5 +391,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "choircarolquiz"
+  "defaultProject": "ccqadmin"
 }

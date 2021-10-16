@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+@include mat-core();
+$ccq-primary: mat-palette($mat-red);
+$ccq-accent: mat-palette($mat-red, A200, A100, A400);
+$ccq-warn: mat-palette($mat-red);
+$ccq-theme: mat-light-theme(
+  (
+    color: (
+      primary: $ccq-primary,
+      accent: $ccq-accent,
+      warn: $ccq-warn
+    )
+  )
+);
+@include angular-material-theme($ccq-theme);
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}

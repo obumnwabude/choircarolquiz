@@ -27,6 +27,9 @@
     ]
   },
   "projects": {
+    "ccqadmin": {
+      "tags": []
+    },
     "ccqquestions": {
       "tags": []
     },
