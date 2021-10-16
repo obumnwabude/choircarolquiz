@@ -14,6 +14,8 @@ export interface Question {
   answers: Answer[];
 }
 
+export const ADMIN_EMAILS = ['obumnwabude@gmail.com'];
+
 export const CANTATA_DATE = '2021-11-20T10:00:00.000Z';
 
 export const LOCALSTORAGE_THEME_KEY = 'theme';

@@ -32,3 +32,27 @@ body {
 .spacer {
   flex: 1 1 auto;
 }
+
+snack-bar-container.mat-snack-bar-container {
+  display: flex;
+  align-items: center;
+}
+
+.snackbar-success,
+.snackbar-error {
+  color: #fff;
+}
+
+.snackbar-success::before {
+  font-family: 'Material Icons';
+  content: '\f013';
+  color: #9ce2b6;
+  margin-right: 8px;
+}
+
+.snackbar-error::before {
+  font-family: 'Material Icons';
+  content: '\e000';
+  color: #fc9494;
+  margin-right: 8px;
+}
