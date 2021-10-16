@@ -70,9 +70,9 @@ export class QuestionsPageComponent implements OnInit {
     this.assignSubs();
   }
 
-  signOut(): void {
+  async signOut(): Promise<void> {
+    await this.auth.signOut();
     this.router.navigate(['/sign-in']);
-    this.auth.signOut();
   }
 
   getLastPage(): number {
