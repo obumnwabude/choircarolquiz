@@ -2,6 +2,9 @@
   "targets": {
     "choircarolquiz": {
       "hosting": {
+        "ccqadmin": [
+          "ccqadmin"
+        ],
         "ccqquestions": [
           "ccqquestions"
         ],

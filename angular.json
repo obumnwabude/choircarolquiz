@@ -18,7 +18,10 @@
             "tsConfig": "apps/ccqadmin/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["apps/ccqadmin/src/assets"],
-            "styles": ["apps/ccqadmin/src/styles.scss"],
+            "styles": [
+              "./node_modules/firebaseui/dist/firebaseui.css",
+              "apps/ccqadmin/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -88,6 +91,10 @@
             "jestConfig": "apps/ccqadmin/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     },
