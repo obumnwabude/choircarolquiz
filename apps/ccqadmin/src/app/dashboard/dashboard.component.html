@@ -1,12 +1,62 @@
-<mat-toolbar>
-  <span>Choir Quiz Admin</span>
-  <span class="spacer"></span>
-  <button
-    mat-ripple
-    mat-raised-button
-    (click)="signOut()"
-    aria-label="Sign Out"
-  >
-    <span>Sign Out</span>
-  </button>
-</mat-toolbar>
+<div id="app-container">
+  <mat-toolbar>
+    <span>Choir Quiz Admin</span>
+    <span class="spacer"></span>
+    <button
+      mat-ripple
+      mat-raised-button
+      (click)="signOut()"
+      aria-label="Sign Out"
+    >
+      <span>Sign Out</span>
+    </button>
+  </mat-toolbar>
+
+  <main>
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      <mat-form-field>
+        <mat-label>Full Name</mat-label>
+        <input
+          matInput
+          required
+          type="text"
+          name="name"
+          [(ngModel)]="participant.name"
+          #name="ngModel"
+        />
+        <mat-error *ngIf="name.errors?.required"
+          >Full Name is required.</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Phone Number</mat-label>
+        <input
+          matInput
+          required
+          type="text"
+          pattern="^\+234[789][01]\d{8}$"
+          name="phone"
+          [(ngModel)]="participant.phone"
+          #phone="ngModel"
+        />
+        <mat-error *ngIf="phone.errors?.required"
+          >Phone Number is required.</mat-error
+        >
+        <mat-error *ngIf="phone.errors?.pattern"
+          >Enter a valid phone number.</mat-error
+        >
+      </mat-form-field>
+      <p class="text-center">
+        <button
+          mat-ripple
+          mat-raised-button
+          type="submit"
+          aria-label="Create Participant"
+          [disabled]="!form.form.valid"
+        >
+          <span>Create Participant</span>
+        </button>
+      </p>
+    </form>
+  </main>
+</div>

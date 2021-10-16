@@ -3,6 +3,10 @@ export interface Answer {
   value: string;
 }
 
+export class Participant {
+  constructor(public name: string, public phone: string) {}
+}
+
 export interface Question {
   index: number;
   value: string;

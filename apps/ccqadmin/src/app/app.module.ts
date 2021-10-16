@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {
@@ -7,10 +8,13 @@ import {
   redirectLoggedInTo,
   redirectUnauthorizedTo
 } from '@angular/fire/auth-guard';
+import { FormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
 import { firebase, FirebaseUIModule } from 'firebaseui-angular';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 
@@ -50,12 +54,16 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
   declarations: [AppComponent, SignInComponent, DashboardComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     MatButtonModule,
+    MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatToolbarModule,
     NgxUiLoaderModule,
     NgxUiLoaderRouterModule
