@@ -11,7 +11,7 @@
     "test": "nx test",
     "functions:deploy": "firebase deploy --only functions",
     "functions:logs": "concurrently \"npm run nx build functions --watch\" \"firebase functions:log\"",
-    "functions:serve": "concurrently \"npm run nx build functions -- --watch\" \"firebase emulators:start --only functions\"",
+    "functions:serve": "concurrently \"npm run nx build functions -- --watch\" \"firebase emulators:start --only auth,firestore,functions\"",
     "functions:shell": "concurrently \"npm run nx build functions --watch\" \"firebase functions:shell\" --raw"
   },
   "private": true,
