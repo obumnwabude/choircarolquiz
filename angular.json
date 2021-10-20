@@ -215,6 +215,7 @@
             "styles": [
               "apps/choircarolquiz/src/assets/flipdown.min.css",
               "./node_modules/aos/dist/aos.css",
+              "./node_modules/firebaseui/dist/firebaseui.css",
               "apps/choircarolquiz/src/styles.scss"
             ],
             "scripts": ["apps/choircarolquiz/src/assets/flipdown.js"]
@@ -365,6 +366,31 @@
           }
         }
       }
+    },
+    "quiz": {
+      "projectType": "library",
+      "root": "libs/quiz",
+      "sourceRoot": "libs/quiz/src",
+      "prefix": "ccq",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/quiz"],
+          "options": {
+            "jestConfig": "libs/quiz/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/quiz/src/**/*.ts",
+              "libs/quiz/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -398,5 +424,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "ccqadmin"
+  "defaultProject": "choircarolquiz"
 }

@@ -9,6 +9,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, Routes } from '@angular/router';
@@ -20,6 +21,10 @@ import { environment } from '../environments/environment';
 
 const routes: Routes = [
   { path: 'cantata', component: HomePageComponent },
+  {
+    path: 'quiz',
+    loadChildren: () => import('@ccq/quiz').then((m) => m.QuizModule)
+  },
   { path: '**', redirectTo: '/cantata', pathMatch: 'full' }
 ];
 
@@ -34,6 +39,7 @@ const routes: Routes = [
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
+    MatListModule,
     MatSidenavModule,
     MatToolbarModule,
     NgxUiLoaderModule,

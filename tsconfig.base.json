@@ -16,7 +16,8 @@
     "strictNullChecks": false,
     "baseUrl": ".",
     "paths": {
-      "@ccq/data": ["libs/data/src/index.ts"]
+      "@ccq/data": ["libs/data/src/index.ts"],
+      "@ccq/quiz": ["libs/quiz/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

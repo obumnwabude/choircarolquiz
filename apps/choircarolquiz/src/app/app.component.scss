@@ -24,6 +24,10 @@ mat-toolbar.header {
   margin: 0 auto;
 }
 
+.ccq-desktop-nav-item {
+  margin-right: 12px;
+}
+
 main {
   padding-top: 72px;
   padding-bottom: 96px;
@@ -32,4 +36,17 @@ main {
 
 mat-toolbar.footer {
   flex-shrink: 0;
+}
+
+@media (max-width: 766.99px) {
+  .ccq-desktop-nav-item {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .ccq-menu-button,
+  mat-sidenav {
+    display: none;
+  }
 }
