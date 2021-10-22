@@ -294,6 +294,31 @@
         }
       }
     },
+    "countdown": {
+      "projectType": "library",
+      "root": "libs/countdown",
+      "sourceRoot": "libs/countdown/src",
+      "prefix": "ccq",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/countdown"],
+          "options": {
+            "jestConfig": "libs/countdown/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/countdown/src/**/*.ts",
+              "libs/countdown/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "data": {
       "root": "libs/data",
       "sourceRoot": "libs/data/src",

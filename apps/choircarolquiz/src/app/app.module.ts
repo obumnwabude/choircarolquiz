@@ -14,7 +14,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, Routes } from '@angular/router';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
-
+import { CountdownModule } from '@ccq/countdown';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { environment } from '../environments/environment';
@@ -43,7 +43,8 @@ const routes: Routes = [
     MatSidenavModule,
     MatToolbarModule,
     NgxUiLoaderModule,
-    NgxUiLoaderRouterModule
+    NgxUiLoaderRouterModule,
+    CountdownModule
   ],
   providers: [ScreenTrackingService, Title],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { ROUND_ONE_DATE } from '@ccq/data';
 
 @Component({
   selector: 'ccq-landing',
@@ -7,6 +8,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnDestroy {
+  ROUND_ONE_DATE = ROUND_ONE_DATE;
   prevTitle: string;
 
   constructor(private title: Title) {
