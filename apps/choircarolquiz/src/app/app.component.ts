@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, HostBinding, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostBinding,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import * as AOS from 'aos';
 import { SPINNER } from 'ngx-ui-loader';
@@ -53,6 +59,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   async signOut(): Promise<void> {
     await this.auth.signOut();
-    this.router.navigate(['/quiz/sign-in']);
+    const currentRoute = this.router.routerState.snapshot.url;
+    if (/\/quiz/.test(currentRoute)) {
+      this.router.navigate(['/quiz/sign-in'], {
+        queryParams: { next: currentRoute }
+      });
+    } else {
+      this.snav.close();
+    }
   }
 }

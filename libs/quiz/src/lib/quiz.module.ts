@@ -17,6 +17,7 @@ import { LeaderboardsComponent } from './leaderboards/leaderboards.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInSuccessUrl: '/quiz',
+  queryParameterForSignInSuccessUrl: 'next',
   signInOptions: [
     {
       provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
@@ -43,12 +44,16 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
       {
         path: 'leaderboards',
         component: LeaderboardsComponent,
-        ...canActivate(() => redirectUnauthorizedTo('/quiz/sign-in'))
+        ...canActivate(() =>
+          redirectUnauthorizedTo('/quiz/sign-in?next=%2Fquiz%2Fleaderboards')
+        )
       },
       {
         path: '',
         component: LandingComponent,
-        ...canActivate(() => redirectUnauthorizedTo('/quiz/sign-in'))
+        ...canActivate(() =>
+          redirectUnauthorizedTo('/quiz/sign-in?next=%2Fquiz')
+        )
       }
     ]),
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
