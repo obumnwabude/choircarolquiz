@@ -1,4 +1,4 @@
-<ccq-countdown targetName="cantata" [targetDate]=CANTATA_DATE></ccq-countdown>
+<ccq-countdown targetName="cantata" [targetDate]="CANTATA_DATE"></ccq-countdown>
 
 <mat-divider></mat-divider>
 
@@ -6,7 +6,7 @@
   <h2 class="ccq-section-heading">About Christmas Cantata</h2>
   <div class="ccq-about-cantata mb-16" data-aos="fade-up">
     <div class="ccq-about-cantata-icon">
-      <svg aria-hidden="true" alt="" style="width: 172px; height: 172px;">
+      <svg aria-hidden="true" alt="" style="width: 172px; height: 172px">
         <use xlink:href="assets/svgs/music.svg#svg"></use>
       </svg>
     </div>
@@ -86,7 +86,10 @@
 
 <section class="max-w-screen-xl mx-auto my-12 px-4 md:px-8">
   <h2 class="ccq-section-heading">Quiz Awards</h2>
-  <div class="trophy-containers mt-12 mb-8 mx-auto text-center" data-aos="fade-up">
+  <div
+    class="trophy-containers mt-12 mb-8 mx-auto text-center"
+    data-aos="fade-up"
+  >
     <div class="trophy-container" id="gold">
       <img
         class="trophy"
@@ -203,27 +206,38 @@
     <p class="text-center mt-8" data-aos="fade-up">
       <a
         mat-raised-button
-        href="https://api.whatsapp.com/send?phone=2347033777385&text=Hi%20Obum.%0D%0AI%20came%20from%20the%20Christmas%20Cantata%20Quiz%20website.%0D%0AI%20want%20to%20register%20for%20the%20quiz.%0D%0AMy%20full%20name%20is%20"
+        *ngIf="auth.authState | async; else registerButton"
+        class="cta"
         color="primary"
-        target="_blank"
-        rel="noopener noreferrer"
-        id="register-button"
-        >
-        <span>Register</span>
-        <svg
-          aria-hidden="true"
-          alt=""
-          style="
-            fill: white;
-            display: inline-block;
-            margin-left: 10px;
-            width: 1.25rem;
-            height: 1.25rem;
-          "
-        >
-          <use xlink:href="assets/svgs/whatsapp.svg#svg"></use>
-        </svg>
-      </a>
+        routerLink="/quiz"
+        >Take Quiz</a
+      >
     </p>
   </div>
 </section>
+
+<ng-template #registerButton>
+  <a
+    mat-raised-button
+    href="https://api.whatsapp.com/send?phone=2347033777385&text=Hi%20Obum.%0D%0AI%20came%20from%20the%20Christmas%20Cantata%20Quiz%20website.%0D%0AI%20want%20to%20register%20for%20the%20quiz.%0D%0AMy%20full%20name%20is%20"
+    color="primary"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="cta"
+  >
+    <span>Register</span>
+    <svg
+      aria-hidden="true"
+      alt=""
+      style="
+        fill: white;
+        display: inline-block;
+        margin-left: 10px;
+        width: 1.25rem;
+        height: 1.25rem;
+      "
+    >
+      <use xlink:href="assets/svgs/whatsapp.svg#svg"></use>
+    </svg>
+  </a>
+</ng-template>

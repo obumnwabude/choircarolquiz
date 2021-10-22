@@ -13,6 +13,7 @@ import { CountdownModule } from '@ccq/countdown';
 
 import { SignInComponent } from './sign-in/sign-in.component';
 import { LandingComponent } from './landing/landing.component';
+import { LeaderboardsComponent } from './leaderboards/leaderboards.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInSuccessUrl: '/quiz',
@@ -40,6 +41,11 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         ...canActivate(() => redirectLoggedInTo('/quiz'))
       },
       {
+        path: 'leaderboards',
+        component: LeaderboardsComponent,
+        ...canActivate(() => redirectUnauthorizedTo('/quiz/sign-in'))
+      },
+      {
         path: '',
         component: LandingComponent,
         ...canActivate(() => redirectUnauthorizedTo('/quiz/sign-in'))
@@ -50,6 +56,6 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatDividerModule,
     CountdownModule
   ],
-  declarations: [SignInComponent, LandingComponent]
+  declarations: [SignInComponent, LandingComponent, LeaderboardsComponent]
 })
 export class QuizModule {}

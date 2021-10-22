@@ -14,7 +14,6 @@ import { FirestoreService } from '../firestore.service';
 declare let document: Document;
 
 @Component({
-  selector: 'ccq-questions-page',
   templateUrl: './questions-page.component.html',
   styleUrls: ['./questions-page.component.scss']
 })
