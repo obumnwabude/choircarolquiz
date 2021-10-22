@@ -24,7 +24,13 @@ mat-toolbar.header {
   margin: 0 auto;
 }
 
-.ccq-desktop-nav-item {
+@media (max-width: 400px) {
+  #nav-cantata-text {
+    display: none;
+  }
+}
+
+.ccq-desktop-nav-item:not(:last-of-type) {
   margin-right: 12px;
 }
 
@@ -48,5 +54,9 @@ mat-toolbar.footer {
   .ccq-menu-button,
   mat-sidenav {
     display: none;
+  }
+
+  #nav-register-button {
+    margin-right: 12px;
   }
 }

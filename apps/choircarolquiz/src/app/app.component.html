@@ -9,9 +9,21 @@
   <mat-sidenav #snav [fixedInViewport]="true" fixedTopGap="56" class="p-6">
     <mat-nav-list>
       <a mat-list-item routerLink="/">Home</a>
+      <a
+        mat-list-item
+        href="https://api.whatsapp.com/send?phone=2347033777385&text=Hi%20Obum.%0D%0AI%20came%20from%20the%20Christmas%20Cantata%20Quiz%20website.%0D%0AI%20want%20to%20register%20for%20the%20quiz.%0D%0AMy%20full%20name%20is%20"
+        color="primary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Register
+      </a>
       <a mat-list-item routerLink="/quiz">Take Quiz</a>
-      <button mat-ripple mat-button (click)="signOut()" *ngIf="isSignedIn">
+      <button mat-list-item (click)="signOut()" *ngIf="isSignedIn">
         Sign Out
+      </button>
+      <button mat-list-item (click)="changeTheme()" title="Switch Theme">
+        {{ THEMES.indexOf(theme) === 0 ? 'Dark Theme' : 'Light Theme' }}
       </button>
     </mat-nav-list>
   </mat-sidenav>
@@ -21,7 +33,7 @@
       <button mat-icon-button (click)="snav.toggle()" class="ccq-menu-button">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Christmas Cantata Quiz</span>
+      <span>Christmas <span id="nav-cantata-text">Cantata </span>Quiz</span>
       <span class="spacer"></span>
       <a mat-stroked-button routerLink="/" class="ccq-desktop-nav-item">Home</a>
       <a mat-stroked-button routerLink="/quiz" class="ccq-desktop-nav-item"
@@ -36,7 +48,22 @@
       >
         Sign Out
       </button>
-      <button mat-icon-button (click)="changeTheme()" title="Switch Theme">
+      <a
+        mat-raised-button
+        id="nav-register-button"
+        href="https://api.whatsapp.com/send?phone=2347033777385&text=Hi%20Obum.%0D%0AI%20came%20from%20the%20Christmas%20Cantata%20Quiz%20website.%0D%0AI%20want%20to%20register%20for%20the%20quiz.%0D%0AMy%20full%20name%20is%20"
+        color="primary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Register
+      </a>
+      <button
+        class="ccq-desktop-nav-item"
+        mat-icon-button
+        (click)="changeTheme()"
+        title="Switch Theme"
+      >
         <mat-icon>{{
           THEMES.indexOf(theme) === 0 ? THEMES[1] : THEMES[0]
         }}</mat-icon>
