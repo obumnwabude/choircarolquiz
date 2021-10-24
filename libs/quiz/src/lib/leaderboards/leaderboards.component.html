@@ -1,1 +1,38 @@
-<h2 class="ml-4 mt-4 text-2xl">Leaderboards</h2>
+<section class="max-w-screen-xl mx-auto my-12 px-4 md:px-8">
+  <div class="flex justify-center">
+    <mat-form-field appearance="fill">
+      <mat-label>Select Round</mat-label>
+      <mat-select disabled [(value)]="selected_round">
+        <mat-option value="round_one">Round One</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <h2 class="ccq-section-heading" id="leaderboard-heading">Leaderboard</h2>
+
+  <div class="px-8">
+    <ol class="list-decimal list-outside text-xl mx-auto">
+      <li class="pb-8 pl-6" *ngFor="let record of records; last as last">
+        <p class="record-name">{{ record.name }}</p>
+        <p class="pl-4 flex items-center text-sm">
+          <span class="mr-2">Points</span>
+          <mat-progress-bar
+            mode="determinate"
+            [value]="record.points / 10"
+          ></mat-progress-bar>
+          <span class="ml-2">{{ record.points }}</span>
+        </p>
+        <p class="pl-4 mb-8 flex items-center text-sm">
+          <span class="mr-2">Score&nbsp;</span>
+          <mat-progress-bar
+            mode="determinate"
+            [value]="record.score"
+          ></mat-progress-bar>
+          <span class="ml-2">{{ record.score }}%</span>
+        </p>
+        <mat-divider *ngIf="!last"></mat-divider>
+      </li>
+    </ol>
+    <p class="my-4 text-3xl font-bold text-center">...</p>
+  </div>
+</section>

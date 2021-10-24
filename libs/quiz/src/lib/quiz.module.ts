@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import {
@@ -9,6 +10,9 @@ import {
 import { firebase, FirebaseUIModule } from 'firebaseui-angular';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { CountdownModule } from '@ccq/countdown';
 
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -34,6 +38,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 
 @NgModule({
   imports: [
+    CommonModule,
     AngularFireAuthModule,
     RouterModule.forChild([
       {
@@ -59,6 +64,8 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     MatButtonModule,
     MatDividerModule,
+    MatProgressBarModule,
+    MatSelectModule,
     CountdownModule
   ],
   declarations: [SignInComponent, LandingComponent, LeaderboardsComponent]

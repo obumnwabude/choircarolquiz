@@ -3,6 +3,12 @@ export interface Answer {
   value: string;
 }
 
+export interface LeaderboardRecord {
+  name: string;
+  points: number;
+  score: number;
+}
+
 export class Participant {
   constructor(public name: string, public phone: string) {}
 }
