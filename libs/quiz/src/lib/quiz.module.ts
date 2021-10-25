@@ -12,10 +12,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { CountdownModule } from '@ccq/countdown';
 
-import { SignInComponent } from './sign-in/sign-in.component';
+import { SignInComponent, UnauthorizedDialogComponent } from './sign-in/sign-in.component';
 import { LandingComponent } from './landing/landing.component';
 import {
   LeaderboardsComponent,
@@ -69,6 +70,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatDialogModule,
     MatDividerModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
     CountdownModule
   ],
@@ -76,7 +78,8 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     SignInComponent,
     LandingComponent,
     LeaderboardsComponent,
-    NoDataDialogComponent
+    NoDataDialogComponent,
+    UnauthorizedDialogComponent
   ]
 })
 export class QuizModule {}

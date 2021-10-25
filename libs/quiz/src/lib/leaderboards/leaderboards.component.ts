@@ -1,7 +1,13 @@
 import { Component, OnDestroy } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { LeaderboardRecord } from '@ccq/data';
+
+@Component({
+  templateUrl: './no-data-dialog.component.html',
+  styles: ['.ccq-section-heading { margin-top: 32px; }']
+})
+export class NoDataDialogComponent {}
 
 @Component({
   templateUrl: './leaderboards.component.html',
@@ -42,35 +48,4 @@ export class LeaderboardsComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.title.setTitle(this.prevTitle);
   }
-}
-
-@Component({
-  styles: [
-    `
-      .ccq-section-heading {
-        margin-top: 32px;
-      }
-    `
-  ],
-  template: `
-    <h2 class="ccq-section-heading">Leaderboard</h2>
-
-    <ul class="pl-4 list-disc list-outside text-2xl mx-auto">
-      <li class="mb-4">There are no winners yet on the Leaderboards.</li>
-      <li class="mb-4">This is because the quiz is still to take place.</li>
-    </ul>
-
-    <p class="text-center mt-8">
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="this.dialogRef.close()"
-      >
-        Understood!
-      </button>
-    </p>
-  `
-})
-export class NoDataDialogComponent {
-  constructor(public dialogRef: MatDialogRef<NoDataDialogComponent>) {}
 }
