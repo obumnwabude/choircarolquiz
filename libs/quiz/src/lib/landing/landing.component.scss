@@ -21,6 +21,12 @@ mat-divider {
   align-items: center;
 }
 
+.disabled .ccq-section-heading,
+.disabled .ccq-section-heading::before {
+  color: unset;
+  background-color: unset;
+}
+
 ::ng-deep.light_mode .disabled {
   color: rgba(0, 0, 0, 0.5);
 }
