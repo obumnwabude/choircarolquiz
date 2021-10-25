@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import {
   canActivate,
   redirectLoggedInTo,
   redirectUnauthorizedTo
 } from '@angular/fire/auth-guard';
+import {
+  AngularFireFunctionsModule,
+  ORIGIN,
+  NEW_ORIGIN_BEHAVIOR,
+  USE_EMULATOR as USE_FUNCTIONS_EMULATOR
+} from '@angular/fire/functions';
 import { firebase, FirebaseUIModule } from 'firebaseui-angular';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -15,8 +20,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { CountdownModule } from '@ccq/countdown';
+import { environment } from '@ccq/ccq/env';
 
-import { SignInComponent, UnauthorizedDialogComponent } from './sign-in/sign-in.component';
+import {
+  SignInComponent,
+  UnauthorizedDialogComponent
+} from './sign-in/sign-in.component';
 import { LandingComponent } from './landing/landing.component';
 import {
   LeaderboardsComponent,
@@ -24,8 +33,6 @@ import {
 } from './leaderboards/leaderboards.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
-  signInSuccessUrl: '/quiz',
-  queryParameterForSignInSuccessUrl: 'next',
   signInOptions: [
     {
       provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
@@ -41,9 +48,15 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 };
 
 @NgModule({
+  declarations: [
+    SignInComponent,
+    LandingComponent,
+    LeaderboardsComponent,
+    NoDataDialogComponent,
+    UnauthorizedDialogComponent
+  ],
   imports: [
     CommonModule,
-    AngularFireAuthModule,
     RouterModule.forChild([
       {
         path: 'sign-in',
@@ -66,6 +79,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
       }
     ]),
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    AngularFireFunctionsModule,
     MatButtonModule,
     MatDialogModule,
     MatDividerModule,
@@ -74,12 +88,16 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatSelectModule,
     CountdownModule
   ],
-  declarations: [
-    SignInComponent,
-    LandingComponent,
-    LeaderboardsComponent,
-    NoDataDialogComponent,
-    UnauthorizedDialogComponent
+  providers: [
+    { provide: NEW_ORIGIN_BEHAVIOR, useValue: true },
+    {
+      provide: ORIGIN,
+      useValue: environment.production ? location.origin : undefined
+    },
+    {
+      provide: USE_FUNCTIONS_EMULATOR,
+      useValue: environment.production ? undefined : ['localhost', 5001]
+    }
   ]
 })
 export class QuizModule {}

@@ -11,6 +11,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "outputs": ["{options.outputPath}"],
           "options": {
+            "showCircularDependencies": false,
             "outputPath": "dist/apps/ccqadmin",
             "index": "apps/ccqadmin/src/index.html",
             "main": "apps/ccqadmin/src/main.ts",

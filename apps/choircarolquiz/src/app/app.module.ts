@@ -6,6 +6,10 @@ import {
   AngularFireAnalyticsModule,
   ScreenTrackingService
 } from '@angular/fire/analytics';
+import {
+  AngularFireAuthModule,
+  USE_EMULATOR as USE_AUTH_EMULATOR
+} from '@angular/fire/auth';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,6 +40,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAnalyticsModule,
+    AngularFireAuthModule,
     MatButtonModule,
     MatDividerModule,
     MatIconModule,
@@ -46,7 +51,14 @@ const routes: Routes = [
     NgxUiLoaderRouterModule,
     CountdownModule
   ],
-  providers: [ScreenTrackingService, Title],
+  providers: [
+    ScreenTrackingService,
+    {
+      provide: USE_AUTH_EMULATOR,
+      useValue: environment.production ? undefined : ['localhost', 9099]
+    },
+    Title
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,7 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireFunctions } from '@angular/fire/functions';
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   templateUrl: './unauthorized-dialog.component.html',
@@ -24,16 +26,42 @@ export class UnauthorizedDialogComponent {
 export class SignInComponent implements OnDestroy {
   prevTitle: string;
   showLoading = true;
+  window = window;
 
-  constructor(public dialog: MatDialog, private title: Title) {
+  constructor(
+    private auth: AngularFireAuth,
+    private fns: AngularFireFunctions,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router,
+    private title: Title
+  ) {
     this.prevTitle = this.title.getTitle();
     this.title.setTitle(`Sign In | ${this.prevTitle}`);
-    // this.dialog.open(UnauthorizedDialogComponent, {
-    //   autoFocus: true,
-    //   closeOnNavigation: true,
-    //   disableClose: true,
-    //   hasBackdrop: true
-    // });
+  }
+
+  async checkParticipant(): Promise<void> {
+    this.showLoading = true;
+    let result = false;
+    try {
+      result = await this.fns.httpsCallable('checkParticipant')({}).toPromise();
+    } catch (_) {
+      window.location.reload();
+    }
+
+    if (!result) {
+      this.dialog.open(UnauthorizedDialogComponent, {
+        autoFocus: true,
+        closeOnNavigation: true,
+        disableClose: true,
+        hasBackdrop: true
+      });
+      await this.auth.signOut();
+      this.showLoading = false;
+    } else {
+      const nextUrl = this.route.snapshot.paramMap.get('next');
+      this.router.navigate([nextUrl ?? '/quiz']);
+    }
   }
 
   ngOnDestroy(): void {

@@ -9,6 +9,10 @@
     [class.pt-8]="showLoading"
   >
     <mat-spinner *ngIf="showLoading"></mat-spinner>
-    <firebase-ui (uiShown)="showLoading = false"></firebase-ui>
+    <firebase-ui
+      (uiShown)="showLoading = false"
+      (signInSuccessWithAuthResult)="checkParticipant()"
+      (signInFailure)="window.location.reload()"
+    ></firebase-ui>
   </div>
 </section>

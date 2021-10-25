@@ -24,6 +24,46 @@ exports.decrementQuestionCounter = functions.firestore
       .catch((error) => console.log(error))
   );
 
+exports.checkParticipant = functions.https.onCall(async (_, context) => {
+  if (!context?.auth?.token?.phone_number) {
+    throw new functions.https.HttpsError(
+      'unauthenticated',
+      'Please Sign In First!'
+    );
+  }
+
+  const phone = context.auth.token.phone_number;
+  let participantDetails: DocumentSnapshot;
+  try {
+    participantDetails = await admin
+      .firestore()
+      .doc(`/participants/${phone}`)
+      .get();
+  } catch (error) {
+    functions.logger.error(error);
+    throw new functions.https.HttpsError(
+      'internal',
+      `Error occured at fetching participant data: ${error}`
+    );
+  }
+
+  if (participantDetails.exists) {
+    return true;
+  } else {
+    try {
+      const participantRecord = await admin.auth().getUserByPhoneNumber(phone);
+      await admin.auth().deleteUser(participantRecord.uid);
+    } catch (error) {
+      functions.logger.error(error);
+      throw new functions.https.HttpsError(
+        'internal',
+        `Error occured at clearing participant record: ${error}`
+      );
+    }
+    return false;
+  }
+});
+
 exports.createParticipant = functions.https.onCall(async (data, context) => {
   if (!context.auth) {
     throw new functions.https.HttpsError(
@@ -47,9 +87,7 @@ exports.createParticipant = functions.https.onCall(async (data, context) => {
     );
   }
 
-  const participantRef = admin
-    .firestore()
-    .doc(`/participants/${data.phone}`);
+  const participantRef = admin.firestore().doc(`/participants/${data.phone}`);
 
   let participantDetails: DocumentSnapshot;
   try {

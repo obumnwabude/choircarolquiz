@@ -71,6 +71,10 @@
       ],
       "rewrites": [
         {
+          "source": "/checkParticipant",
+          "function": "checkParticipant"
+        },
+        {
           "source": "**",
           "destination": "/index.html"
         }
