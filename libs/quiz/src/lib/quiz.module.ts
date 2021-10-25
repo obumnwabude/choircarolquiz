@@ -9,15 +9,18 @@ import {
 } from '@angular/fire/auth-guard';
 import { firebase, FirebaseUIModule } from 'firebaseui-angular';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { CountdownModule } from '@ccq/countdown';
 
 import { SignInComponent } from './sign-in/sign-in.component';
 import { LandingComponent } from './landing/landing.component';
-import { LeaderboardsComponent } from './leaderboards/leaderboards.component';
+import {
+  LeaderboardsComponent,
+  NoDataDialogComponent
+} from './leaderboards/leaderboards.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInSuccessUrl: '/quiz',
@@ -63,11 +66,17 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     ]),
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     MatButtonModule,
+    MatDialogModule,
     MatDividerModule,
     MatProgressBarModule,
     MatSelectModule,
     CountdownModule
   ],
-  declarations: [SignInComponent, LandingComponent, LeaderboardsComponent]
+  declarations: [
+    SignInComponent,
+    LandingComponent,
+    LeaderboardsComponent,
+    NoDataDialogComponent
+  ]
 })
 export class QuizModule {}
