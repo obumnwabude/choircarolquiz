@@ -31,7 +31,12 @@ export class LeaderboardsComponent implements OnDestroy {
   constructor(public dialog: MatDialog, private title: Title) {
     this.prevTitle = this.title.getTitle();
     this.title.setTitle(`Leaderboards | ${this.prevTitle}`);
-    this.dialog.open(NoDataDialogComponent);
+    this.dialog.open(NoDataDialogComponent, {
+      autoFocus: true,
+      closeOnNavigation: true,
+      disableClose: true,
+      hasBackdrop: true
+    });
   }
 
   ngOnDestroy(): void {
@@ -51,8 +56,8 @@ export class LeaderboardsComponent implements OnDestroy {
     <h2 class="ccq-section-heading">Leaderboard</h2>
 
     <ul class="pl-4 list-disc list-outside text-2xl mx-auto">
-      <li class="mb-4">No data yet for Leaderboards.</li>
-      <li class="mb-4">This because quiz is still to take place.</li>
+      <li class="mb-4">There are no winners yet on the Leaderboards.</li>
+      <li class="mb-4">This is because the quiz is still to take place.</li>
     </ul>
 
     <p class="text-center mt-8">
@@ -61,7 +66,7 @@ export class LeaderboardsComponent implements OnDestroy {
         color="primary"
         (click)="this.dialogRef.close()"
       >
-        Ok, roger that!
+        Understood!
       </button>
     </p>
   `
