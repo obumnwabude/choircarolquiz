@@ -24,6 +24,22 @@ exports.decrementQuestionCounter = functions.firestore
       .catch((error) => console.log(error))
   );
 
+exports.incrementParticipantCounter = functions.auth.user().onCreate(() =>
+  admin
+    .firestore()
+    .doc('/participants/counter')
+    .set({ count: admin.firestore.FieldValue.increment(1) }, { merge: true })
+    .catch((error) => console.log(error))
+);
+
+exports.decrementParticipantCounter = functions.auth.user().onDelete(() =>
+  admin
+    .firestore()
+    .doc('/participants/counter')
+    .set({ count: admin.firestore.FieldValue.increment(-1) }, { merge: true })
+    .catch((error) => console.log(error))
+);
+
 exports.checkParticipant = functions.https.onCall(async (_, context) => {
   if (!context?.auth?.token?.phone_number) {
     throw new functions.https.HttpsError(
