@@ -19,6 +19,7 @@ import {
   MatSnackBarModule,
   MAT_SNACK_BAR_DEFAULT_OPTIONS
 } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFabMenuModule } from '@angular-material-extensions/fab-menu';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -83,6 +84,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatInputModule,
     MatRadioModule,
     MatSnackBarModule,
+    MatSidenavModule,
     MatToolbarModule,
     MatFabMenuModule,
     NgxPaginationModule,
