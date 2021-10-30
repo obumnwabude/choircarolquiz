@@ -9,11 +9,8 @@ mat-sidenav-content {
 @media (min-width: 1400px) {
   mat-sidenav-content {
     margin: 0 auto;
-    border: 5px solid #000;
-  }
-
-  ::ng-deep.dark_mode mat-sidenav-content {
-    border-color: #fff;
+    border: 5px solid;
+    border-top: none;
   }
 }
 

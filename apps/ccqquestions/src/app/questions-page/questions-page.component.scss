@@ -1,3 +1,7 @@
+mat-sidenav-container {
+  height: 100%;
+}
+
 mat-sidenav-content {
   display: flex;
   flex-direction: column;
@@ -34,8 +38,8 @@ mat-fab-menu {
 @media (min-width: 1408px) {
   mat-toolbar,
   main {
-    border-left: 5px solid black;
-    border-right: 5px solid black;
+    border-left: 5px solid;
+    border-right: 5px solid;
   }
 
   mat-fab-menu {
