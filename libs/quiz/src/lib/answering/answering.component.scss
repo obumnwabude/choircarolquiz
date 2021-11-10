@@ -8,6 +8,45 @@ mat-progress-bar {
 }
 
 .answer.selected {
-  border-color: #40C4FF;
-  box-shadow: 0 0 4px 2px #ccedfb;
+  border-color: #448aff;
+  box-shadow: 0 0 4px 2px #cddefb;
+}
+
+.answer.correct {
+  border-color: #2E7D32;
+  box-shadow: 0 0 4px 2px #A5D6A7;
+  background-color: #A5D6A7;
+}
+
+::ng-deep.dark_mode .answer.correct {
+  background-color: #4CAF50;
+}
+
+.answer.correct-inform {
+  border-color: #2E7D32;
+}
+
+.answer.wrong {
+  border-color: #C62828;
+  box-shadow: 0 0 4px 2px #EF9A9A;
+  background-color: #EF9A9A;
+}
+
+::ng-deep.dark_mode .answer.wrong {
+  background-color: #F44336;
+}
+
+.space-filler {
+  width: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.correct-icon {
+  color: #2E7D32;
+  margin-right: 0.5rem;
+}
+
+.wrong-icon {
+  color: #C62828;
+  margin-right: 0.5rem;
 }

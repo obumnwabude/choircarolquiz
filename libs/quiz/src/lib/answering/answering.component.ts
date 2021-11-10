@@ -13,8 +13,12 @@ export class AnsweringComponent {
     { index: 'D', checked: false, value: 'Answer D' }
   ];
   selectedAnswer = '';
+  isInCheck = false;
+  selectedIndex = '';
+  correctIndex = '';
 
   selectAnswer(answer: string): void {
+    if (this.isInCheck) return;
     this.selectedAnswer = answer;
     this.answers.forEach((a) => (a.checked = false));
     this.answers.filter((a) => a.index === answer)[0].checked = true;

@@ -16,6 +16,7 @@ import { firebase, FirebaseUIModule } from 'firebaseui-angular';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {
@@ -100,6 +101,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatButtonModule,
     MatDialogModule,
     MatDividerModule,
+    MatIconModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatRadioModule,

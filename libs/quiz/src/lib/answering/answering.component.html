@@ -4,9 +4,11 @@
   value="40"
 ></mat-progress-bar>
 
+
+
 <div class="max-w-screen-sm mx-auto mt-8 mb-12 px-8">
   <h2 class="font-bold text-2xl underline">Question 1</h2>
-  <p class="mb-8">
+  <p class="mb-8 select-none">
     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga provident ad
     nostrum architecto assumenda modi laborum fugit odio. Aliquid itaque animi
     facilis officiis iste esse, architecto in inventore fugit ipsum!
@@ -14,19 +16,68 @@
   <mat-radio-group (ngModel)="(selectedAnswer)">
     <div
       *ngFor="let answer of answers"
-      class="answer py-3 px-4 mb-5 mx-auto border-2 border-gray-300 flex"
+      class="
+        answer
+        py-3
+        px-4
+        mb-5
+        mx-auto
+        border-2 border-gray-300
+        flex
+        items-center
+      "
       (click)="selectAnswer(answer.index)"
       [class.selected]="answer.index === selectedAnswer"
+      [class.correct]="
+        answer.index === selectedIndex && answer.index === correctIndex
+      "
+      [class.wrong]="
+        answer.index === selectedIndex && answer.index !== correctIndex
+      "
+      [class.correct-inform]="
+        answer.index !== selectedIndex && answer.index === correctIndex
+      "
     >
       <mat-radio-button
         [value]="answer.index"
         [checked]="answer.checked"
+        *ngIf="!isInCheck"
       ></mat-radio-button>
-      <span>{{ answer.value }}</span>
+      <span
+        *ngIf="
+          isInCheck &&
+          answer.index !== selectedIndex &&
+          answer.index !== correctIndex
+        "
+        class="space-filler"
+      ></span>
+      <mat-icon
+        *ngIf="isInCheck && answer.index === correctIndex"
+        class="correct-icon"
+        >task_alt</mat-icon
+      >
+      <mat-icon
+        *ngIf="
+          isInCheck &&
+          answer.index === selectedIndex &&
+          answer.index !== correctIndex
+        "
+        class="wrong-icon"
+        >highlight_off</mat-icon
+      >
+      <span class="select-none">{{ answer.value }}</span>
     </div>
   </mat-radio-group>
 
   <div class="text-center pt-2">
-    <button mat-raised-button color="accent">Check</button>
+    <button
+      mat-raised-button
+      color="accent"
+      *ngIf="!isInCheck"
+      [disabled]="selectedAnswer === ''"
+    >
+      Check
+    </button>
+    <button mat-raised-button color="accent" *ngIf="isInCheck">Next</button>
   </div>
 </div>
