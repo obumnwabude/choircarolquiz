@@ -4,9 +4,16 @@
   value="40"
 ></mat-progress-bar>
 
+<p class="countdown mat-elevation-z1" [class.red-countdown]="secondsLeft < 10">
+  <span class="text-lg">Time Left:&nbsp;</span>
+  <span
+    class="font-bold text-2xl"
+    [class.blinker]="secondsLeft < 10 && secondsLeft > 0"
+    >00:{{ secondsLeft | number: '2.0-0' }}</span
+  >
+</p>
 
-
-<div class="max-w-screen-sm mx-auto mt-8 mb-12 px-8">
+<div class="max-w-screen-sm mx-auto mt-20 mb-12 px-8">
   <h2 class="font-bold text-2xl underline">Question 1</h2>
   <p class="mb-8 select-none">
     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga provident ad

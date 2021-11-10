@@ -16,6 +16,19 @@ export class AnsweringComponent {
   isInCheck = false;
   selectedIndex = '';
   correctIndex = '';
+  secondsLeft = 30;
+  countdownInterval: number;
+
+  constructor() {
+    setTimeout(() => {
+      this.countdownInterval = window.setInterval(() => {
+        this.secondsLeft--;
+        if (this.secondsLeft === 0) {
+          clearInterval(this.countdownInterval);
+        }
+      }, 1000);
+    }, 1500);
+  }
 
   selectAnswer(answer: string): void {
     if (this.isInCheck) return;
