@@ -26,11 +26,12 @@ import {
   SignInComponent,
   UnauthorizedDialogComponent
 } from './sign-in/sign-in.component';
-import { LandingComponent } from './landing/landing.component';
+import { AboutRoundComponent, LandingComponent } from './landing/landing.component';
 import {
   LeaderboardsComponent,
   NoDataDialogComponent
 } from './leaderboards/leaderboards.component';
+import { AnsweringComponent } from './answering/answering.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInOptions: [
@@ -49,11 +50,13 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 
 @NgModule({
   declarations: [
-    SignInComponent,
+    AboutRoundComponent,
     LandingComponent,
     LeaderboardsComponent,
     NoDataDialogComponent,
-    UnauthorizedDialogComponent
+    SignInComponent,
+    UnauthorizedDialogComponent,
+    AnsweringComponent
   ],
   imports: [
     CommonModule,
@@ -75,6 +78,13 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         component: LandingComponent,
         ...canActivate(() =>
           redirectUnauthorizedTo('/quiz/sign-in?next=%2Fquiz')
+        )
+      },
+      {
+        path: 'round1',
+        component: AnsweringComponent,
+        ...canActivate(() =>
+          redirectUnauthorizedTo('/quiz/sign-in?next=%2Fquiz%2round1')
         )
       }
     ]),
