@@ -3,9 +3,7 @@
     {
       "target": "ccqadmin",
       "public": "dist/apps/ccqadmin",
-      "ignore": [
-        "**/.*"
-      ],
+      "ignore": ["**/.*"],
       "headers": [
         {
           "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
@@ -31,9 +29,7 @@
     {
       "target": "ccqquestions",
       "public": "dist/apps/ccqquestions",
-      "ignore": [
-        "**/.*"
-      ],
+      "ignore": ["**/.*"],
       "headers": [
         {
           "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
@@ -55,9 +51,7 @@
     {
       "target": "choircarolquiz",
       "public": "dist/apps/choircarolquiz",
-      "ignore": [
-        "**/.*"
-      ],
+      "ignore": ["**/.*"],
       "headers": [
         {
           "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
@@ -70,6 +64,14 @@
         }
       ],
       "rewrites": [
+        {
+          "source": "/startQuiz",
+          "function": "startQuiz"
+        },
+        {
+          "source": "/checkAnswer",
+          "function": "checkAnswer"
+        },
         {
           "source": "/checkParticipant",
           "function": "checkParticipant"

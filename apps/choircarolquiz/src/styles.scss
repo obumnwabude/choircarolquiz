@@ -83,3 +83,14 @@ body {
   background-color: #212121;
   color: white;
 }
+
+.snackbar-error {
+  color: #fff;
+}
+
+.snackbar-error::before {
+  font-family: 'Material Icons';
+  content: '\e000';
+  color: #fc9494;
+  margin-right: 8px;
+}

@@ -5,9 +5,10 @@
 ></mat-progress-bar>
 
 <p class="countdown mat-elevation-z1" [class.red-countdown]="secondsLeft < 10">
-  <span class="text-lg">Time Left:&nbsp;</span>
+  <span [class.text-lg]="!isInCheck">Time Left:&nbsp;</span>
   <span
-    class="font-bold text-2xl"
+    [class.text-2xl]="!isInCheck"
+    [class.font-bold]="!isInCheck"
     [class.blinker]="secondsLeft < 10 && secondsLeft > 0"
     >00:{{ secondsLeft | number: '2.0-0' }}</span
   >
@@ -52,6 +53,7 @@
       <mat-radio-button
         [value]="answer.index"
         [checked]="answer.checked"
+        (change)="selectAnswer(answer.index)"
         *ngIf="!isInCheck"
       ></mat-radio-button>
       <span

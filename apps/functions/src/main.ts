@@ -9,3 +9,4 @@ exports.decrementParticipantCounter = decP;
 exports.checkParticipant = participants.check;
 exports.createParticipant = participants.create;
 exports.startQuiz = quiz.start;
+exports.checkAnswer = quiz.check;

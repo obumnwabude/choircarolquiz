@@ -8,6 +8,7 @@ import {
 } from '@ccq/data';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import shuffle from 'lodash-es/shuffle';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'ccq-answering',
@@ -26,7 +27,8 @@ export class AnsweringComponent implements OnInit {
 
   constructor(
     private fns: AngularFireFunctions,
-    private ngxLoader: NgxUiLoaderService
+    private ngxLoader: NgxUiLoaderService,
+    private snackBar: MatSnackBar
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -53,15 +55,27 @@ export class AnsweringComponent implements OnInit {
     }
   }
 
-  checkAnswer(): void {
+  async checkAnswer(): Promise<void> {
     if (this.isInCheck) return;
-    this.ngxLoader.start();
-    clearInterval(this.countdownInterval);
-    this.isInCheck = true;
-    //  const timeTaken = SECS_PER_Q_1ST_ROUND - this.secondsLeft;
-    // TODO: link to cloud function to check correct answer and save selected
-    this.correctIndex = 'B';
-    this.ngxLoader.stop();
+    try {
+      this.ngxLoader.start();
+      clearInterval(this.countdownInterval);
+      this.correctIndex = await this.fns
+        .httpsCallable('checkAnswer')({
+          questionId: this.questions[this.currentQ].index,
+          timeTaken: SECS_PER_Q_1ST_ROUND - this.secondsLeft,
+          answerId: this.selectedIndex
+        })
+        .toPromise();
+      this.isInCheck = true;
+    } catch (error) {
+      this.snackBar.open(
+        `Error: ${error}. We couldn't save your progress, press check again.`
+      );
+      this.isInCheck = false;
+    } finally {
+      this.ngxLoader.stop();
+    }
   }
 
   nextQuestion(): void {
