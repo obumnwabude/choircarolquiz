@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
-import { ADMIN_EMAILS } from '@ccq/data';
+import { ADMIN_EMAILS, Question, QuestionToParticipant } from '@ccq/data';
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore';
 admin.initializeApp();
 
@@ -180,47 +180,58 @@ exports.startQuiz = functions.https.onCall(async (__, context) => {
     participantData = participantDetails.data();
   }
 
-  // if (participantData?.round1) {
-  const noOfQs = (
-    await admin.firestore().doc('/questions/counter').get()
-  ).data().count;
-  const randomQIds = _.sampleSize(_.range(1, noOfQs + 1), 20);
+  let randomQIds: number[];
+  if (!participantData?.round1) {
+    const totalNoOfQs = (
+      await admin.firestore().doc('/questions/counter').get()
+    ).data().count;
+    randomQIds = _.sampleSize(_.range(1, totalNoOfQs + 1), 20);
 
-  participantData.round1 = {
-    data: randomQIds.map((i: number) => {
-      return {
-        questionId: i,
-        answerId: '',
-        correct: false,
-        timeTaken: 0
-      };
-    })
-  };
-  await participantRef.set(participantData, { merge: true });
+    participantData.round1 = {
+      data: randomQIds.map((i: number) => {
+        return {
+          questionId: i,
+          answerId: '',
+          correct: false,
+          timeTaken: 0
+        };
+      })
+    };
+    await participantRef.set(participantData, { merge: true });
+  } else {
+    randomQIds = participantData.round1.data
+      .filter((d) => d.answerId === '' && d.timeTaken === 0)
+      .map((d) => d.questionId);
+  }
 
-  const randomQs1 = (
+  const randomQs1: QuestionToParticipant[] = (
     await admin
       .firestore()
       .collection('/questions')
       .where('index', 'in', _.chunk(randomQIds, 10)[0])
       .get()
   ).docs.map((d) => {
-    const question = d.data();
+    const question = d.data() as Question;
     _.unset(question, 'correct');
     return question;
   });
-  const randomQs2 = (
-    await admin
-      .firestore()
-      .collection('/questions')
-      .where('index', 'in', _.chunk(randomQIds, 10)[1])
-      .get()
-  ).docs.map((d) => {
-    const question = d.data();
-    _.unset(question, 'correct');
-    return question;
-  });
-  const randomQs = [...randomQs1, ...randomQs2];
+  let randomQs2: QuestionToParticipant[] = [];
+  if (randomQIds.length > 10) {
+    randomQs2 = (
+      await admin
+        .firestore()
+        .collection('/questions')
+        .where('index', 'in', _.chunk(randomQIds, 10)[1])
+        .get()
+    ).docs.map((d) => {
+      const question = d.data() as Question;
+      _.unset(question, 'correct');
+      return question;
+    });
+  }
+  const randomQs: QuestionToParticipant[] = _.shuffle([
+    ...randomQs1,
+    ...randomQs2
+  ]);
   return randomQs;
-  //  }
 });

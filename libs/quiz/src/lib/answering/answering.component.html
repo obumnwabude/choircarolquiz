@@ -1,7 +1,7 @@
 <mat-progress-bar
   color="accent"
   mode="determinate"
-  value="40"
+  [value]="((currentQ + 1) / questions.length) * 100"
 ></mat-progress-bar>
 
 <p class="countdown mat-elevation-z1" [class.red-countdown]="secondsLeft < 10">
@@ -14,12 +14,10 @@
 </p>
 
 <div class="max-w-screen-sm mx-auto mt-20 mb-12 px-8">
-  <h2 class="font-bold text-2xl underline">Question 1</h2>
-  <p class="mb-8 select-none">
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga provident ad
-    nostrum architecto assumenda modi laborum fugit odio. Aliquid itaque animi
-    facilis officiis iste esse, architecto in inventore fugit ipsum!
-  </p>
+  <h2 class="font-bold text-2xl underline">
+    Question {{ currentQ + 1 }} of {{ questions.length }}
+  </h2>
+  <p class="mb-8 select-none">{{ questions[currentQ].value }}</p>
   <mat-radio-group (ngModel)="(selectedAnswer)">
     <div
       *ngFor="let answer of answers"

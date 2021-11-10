@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import {
+  AnswerToParticipant,
+  QuestionToParticipant,
+  TEMPLATE_QUESTION
+} from '@ccq/data';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import shuffle from 'lodash-es/shuffle';
 
 @Component({
   selector: 'ccq-answering',
@@ -8,12 +14,9 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
   styleUrls: ['./answering.component.scss']
 })
 export class AnsweringComponent implements OnInit {
-  answers = [
-    { index: 'A', checked: false, value: 'Answer A' },
-    { index: 'B', checked: false, value: 'Answer B' },
-    { index: 'C', checked: false, value: 'Answer C' },
-    { index: 'D', checked: false, value: 'Answer D' }
-  ];
+  currentQ = 0;
+  questions: QuestionToParticipant[] = [TEMPLATE_QUESTION];
+  answers: AnswerToParticipant[] = [];
   selectedAnswer = '';
   isInCheck = false;
   selectedIndex = '';
@@ -29,10 +32,10 @@ export class AnsweringComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     try {
       this.ngxLoader.start();
-      const result = await this.fns
+      this.questions = await this.fns
         .httpsCallable('startQuiz')({})
         .toPromise();
-      console.log(result);
+      this.answers = this.setAnswers(this.questions[this.currentQ]);
 
       setTimeout(() => {
         this.countdownInterval = window.setInterval(() => {
@@ -54,5 +57,15 @@ export class AnsweringComponent implements OnInit {
     this.selectedAnswer = answer;
     this.answers.forEach((a) => (a.checked = false));
     this.answers.filter((a) => a.index === answer)[0].checked = true;
+  }
+
+  setAnswers(question: QuestionToParticipant): AnswerToParticipant[] {
+    const answers = question.answers.map((a) => {
+      return {
+        ...a,
+        checked: false
+      };
+    });
+    return shuffle(answers);
   }
 }

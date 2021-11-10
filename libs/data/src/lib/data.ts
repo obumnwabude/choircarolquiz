@@ -3,6 +3,12 @@ export interface Answer {
   value: string;
 }
 
+export interface AnswerToParticipant {
+  index: string;
+  value: string;
+  checked: boolean;
+}
+
 export interface LeaderboardRecord {
   name: string;
   points: number;
@@ -17,6 +23,12 @@ export interface Question {
   index: number;
   value: string;
   correct: string;
+  answers: Answer[];
+}
+
+export interface QuestionToParticipant {
+  index: number;
+  value: string;
   answers: Answer[];
 }
 
