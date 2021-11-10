@@ -1,12 +1,14 @@
-import * as participants from './app/participants';
-import * as quiz from './app/quiz';
 import { decP, decQ, incP, incQ } from './app/counters';
+import { check as checkParticipant } from './app/participants/check';
+import { create as createParticipant } from './app/participants/create';
+import { check as checkAnswer } from './app/quiz/check';
+import { start } from './app/quiz/start';
 
 exports.incrementQuestionCounter = incQ;
 exports.decrementQuestionCounter = decQ;
 exports.incrementParticipantCounter = incP;
 exports.decrementParticipantCounter = decP;
-exports.checkParticipant = participants.check;
-exports.createParticipant = participants.create;
-exports.startQuiz = quiz.start;
-exports.checkAnswer = quiz.check;
+exports.checkParticipant = checkParticipant;
+exports.createParticipant = createParticipant;
+exports.checkAnswer = checkAnswer;
+exports.startQuiz = start;
