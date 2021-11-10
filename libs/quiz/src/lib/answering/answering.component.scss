@@ -42,14 +42,22 @@ mat-progress-bar {
   max-width: 384px;
 }
 
+::ng-deep.light_mode .answer {
+  border-color: rgba(209, 213, 219, var(--tw-border-opacity));
+}
+
+::ng-deep.dark_mode .answer {
+  border-color: rgba(75, 85, 99, var(--tw-border-opacity));
+}
+
 .answer.selected {
   border-color: #448aff;
-  box-shadow: 0 0 4px 2px #cddefb;
+  box-shadow: 0 0 1px 1px #cddefb;
 }
 
 .answer.correct {
   border-color: #2E7D32;
-  box-shadow: 0 0 4px 2px #A5D6A7;
+  box-shadow: 0 0 1px 1px #A5D6A7;
   background-color: #A5D6A7;
 }
 
@@ -63,7 +71,7 @@ mat-progress-bar {
 
 .answer.wrong {
   border-color: #C62828;
-  box-shadow: 0 0 4px 2px #EF9A9A;
+  box-shadow: 0 0 1px 1px #EF9A9A;
   background-color: #EF9A9A;
 }
 

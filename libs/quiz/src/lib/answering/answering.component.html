@@ -18,7 +18,7 @@
     Question {{ currentQ + 1 }} of {{ questions.length }}
   </h2>
   <p class="mb-8 select-none">{{ questions[currentQ].value }}</p>
-  <mat-radio-group (ngModel)="(selectedAnswer)">
+  <mat-radio-group (ngModel)="(selectedIndex)">
     <div
       *ngFor="let answer of answers"
       class="
@@ -32,15 +32,21 @@
         items-center
       "
       (click)="selectAnswer(answer.index)"
-      [class.selected]="answer.index === selectedAnswer"
+      [class.selected]="!isInCheck && answer.index === selectedIndex"
       [class.correct]="
-        answer.index === selectedIndex && answer.index === correctIndex
+        isInCheck &&
+        answer.index === selectedIndex &&
+        answer.index === correctIndex
       "
       [class.wrong]="
-        answer.index === selectedIndex && answer.index !== correctIndex
+        isInCheck &&
+        answer.index === selectedIndex &&
+        answer.index !== correctIndex
       "
       [class.correct-inform]="
-        answer.index !== selectedIndex && answer.index === correctIndex
+        isInCheck &&
+        answer.index !== selectedIndex &&
+        answer.index === correctIndex
       "
     >
       <mat-radio-button
@@ -79,10 +85,25 @@
       mat-raised-button
       color="accent"
       *ngIf="!isInCheck"
-      [disabled]="selectedAnswer === ''"
+      [disabled]="selectedIndex === ''"
+      (click)="checkAnswer()"
     >
       Check
     </button>
-    <button mat-raised-button color="accent" *ngIf="isInCheck">Next</button>
+    <button
+      mat-raised-button
+      color="accent"
+      *ngIf="isInCheck && currentQ + 1 < questions.length"
+      (click)="nextQuestion()"
+    >
+      Next
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      *ngIf="isInCheck && currentQ + 1 === questions.length"
+    >
+      Submit
+    </button>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as _ from 'lodash';
-import { ADMIN_EMAILS, Question, QuestionToParticipant } from '@ccq/data';
+import { ADMIN_EMAILS, Question, QuestionToParticipant, Q_PER_1ST_ROUND } from '@ccq/data';
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore';
 admin.initializeApp();
 
@@ -185,7 +185,7 @@ exports.startQuiz = functions.https.onCall(async (__, context) => {
     const totalNoOfQs = (
       await admin.firestore().doc('/questions/counter').get()
     ).data().count;
-    randomQIds = _.sampleSize(_.range(1, totalNoOfQs + 1), 20);
+    randomQIds = _.sampleSize(_.range(1, totalNoOfQs + 1), Q_PER_1ST_ROUND);
 
     participantData.round1 = {
       data: randomQIds.map((i: number) => {

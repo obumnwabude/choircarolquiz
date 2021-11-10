@@ -3,6 +3,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import {
   AnswerToParticipant,
   QuestionToParticipant,
+  SECS_PER_Q_1ST_ROUND,
   TEMPLATE_QUESTION
 } from '@ccq/data';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -17,11 +18,10 @@ export class AnsweringComponent implements OnInit {
   currentQ = 0;
   questions: QuestionToParticipant[] = [TEMPLATE_QUESTION];
   answers: AnswerToParticipant[] = [];
-  selectedAnswer = '';
   isInCheck = false;
   selectedIndex = '';
   correctIndex = '';
-  secondsLeft = 30;
+  secondsLeft = SECS_PER_Q_1ST_ROUND;
   countdownInterval: number;
 
   constructor(
@@ -42,6 +42,7 @@ export class AnsweringComponent implements OnInit {
           this.secondsLeft--;
           if (this.secondsLeft === 0) {
             clearInterval(this.countdownInterval);
+            this.checkAnswer();
           }
         }, 1000);
       }, 1500);
@@ -52,11 +53,39 @@ export class AnsweringComponent implements OnInit {
     }
   }
 
-  selectAnswer(answer: string): void {
+  checkAnswer(): void {
     if (this.isInCheck) return;
-    this.selectedAnswer = answer;
+    this.ngxLoader.start();
+    clearInterval(this.countdownInterval);
+    this.isInCheck = true;
+    //  const timeTaken = SECS_PER_Q_1ST_ROUND - this.secondsLeft;
+    // TODO: link to cloud function to check correct answer and save selected
+    this.correctIndex = 'B';
+    this.ngxLoader.stop();
+  }
+
+  nextQuestion(): void {
+    if (!this.isInCheck) return;
+    this.correctIndex = '';
+    this.currentQ++;
+    this.isInCheck = false;
+    this.selectedIndex = '';
+    this.secondsLeft = SECS_PER_Q_1ST_ROUND;
+    this.answers = this.setAnswers(this.questions[this.currentQ]);
+    this.countdownInterval = window.setInterval(() => {
+      this.secondsLeft--;
+      if (this.secondsLeft === 0) {
+        clearInterval(this.countdownInterval);
+        this.checkAnswer();
+      }
+    }, 1000);
+  }
+
+  selectAnswer(answerId: string): void {
+    if (this.isInCheck) return;
+    this.selectedIndex = answerId;
     this.answers.forEach((a) => (a.checked = false));
-    this.answers.filter((a) => a.index === answer)[0].checked = true;
+    this.answers.filter((a) => a.index === answerId)[0].checked = true;
   }
 
   setAnswers(question: QuestionToParticipant): AnswerToParticipant[] {
