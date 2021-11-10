@@ -46,6 +46,7 @@ export class SignInComponent implements OnDestroy {
     try {
       result = await this.fns.httpsCallable('checkParticipant')({}).toPromise();
     } catch (_) {
+      await this.auth.signOut();
       window.location.reload();
     }
 

@@ -37,6 +37,7 @@
     "firebase-functions": "^3.15.7",
     "firebaseui": "^4.8.0",
     "firebaseui-angular": "^5.1.2",
+    "lodash": "^4.17.21",
     "ngx-pagination": "^5.1.1",
     "ngx-ui-loader": "^11.0.0",
     "rxjs": "~6.6.0",
@@ -45,7 +46,8 @@
   },
   "firebase-functions-dependencies": [
     "firebase-admin",
-    "firebase-functions"
+    "firebase-functions",
+    "lodash"
   ],
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.2.0",

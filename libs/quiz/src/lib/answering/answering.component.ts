@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'ccq-answering',
   templateUrl: './answering.component.html',
   styleUrls: ['./answering.component.scss']
 })
-export class AnsweringComponent {
+export class AnsweringComponent implements OnInit {
   answers = [
     { index: 'A', checked: false, value: 'Answer A' },
     { index: 'B', checked: false, value: 'Answer B' },
@@ -19,15 +21,32 @@ export class AnsweringComponent {
   secondsLeft = 30;
   countdownInterval: number;
 
-  constructor() {
-    setTimeout(() => {
-      this.countdownInterval = window.setInterval(() => {
-        this.secondsLeft--;
-        if (this.secondsLeft === 0) {
-          clearInterval(this.countdownInterval);
-        }
-      }, 1000);
-    }, 1500);
+  constructor(
+    private fns: AngularFireFunctions,
+    private ngxLoader: NgxUiLoaderService
+  ) {}
+
+  async ngOnInit(): Promise<void> {
+    try {
+      this.ngxLoader.start();
+      const result = await this.fns
+        .httpsCallable('startQuiz')({})
+        .toPromise();
+      console.log(result);
+
+      setTimeout(() => {
+        this.countdownInterval = window.setInterval(() => {
+          this.secondsLeft--;
+          if (this.secondsLeft === 0) {
+            clearInterval(this.countdownInterval);
+          }
+        }, 1000);
+      }, 1500);
+    } catch (_) {
+      window.location.reload();
+    } finally {
+      this.ngxLoader.stop();
+    }
   }
 
   selectAnswer(answer: string): void {

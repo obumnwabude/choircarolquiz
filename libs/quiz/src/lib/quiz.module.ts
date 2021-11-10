@@ -24,6 +24,8 @@ import {
   MAT_RADIO_DEFAULT_OPTIONS
 } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { CountdownModule } from '@ccq/countdown';
 import { environment } from '@ccq/ccq/env';
 
@@ -106,6 +108,8 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatProgressSpinnerModule,
     MatRadioModule,
     MatSelectModule,
+    MatSnackBarModule,
+    NgxUiLoaderModule,
     CountdownModule
   ],
   providers: [
@@ -121,6 +125,13 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     {
       provide: MAT_RADIO_DEFAULT_OPTIONS,
       useValue: { color: 'accent' }
+    },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 5000,
+        verticalPosition: 'top'
+      }
     }
   ]
 })

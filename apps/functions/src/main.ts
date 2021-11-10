@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import * as _ from 'lodash';
 import { ADMIN_EMAILS } from '@ccq/data';
 import { DocumentSnapshot } from 'firebase-functions/lib/providers/firestore';
 admin.initializeApp();
@@ -146,4 +147,80 @@ exports.createParticipant = functions.https.onCall(async (data, context) => {
       `Error occured at creating auth participant: ${error}`
     );
   }
+});
+
+exports.startQuiz = functions.https.onCall(async (__, context) => {
+  if (!context?.auth?.token?.phone_number) {
+    throw new functions.https.HttpsError(
+      'unauthenticated',
+      'Please Sign In First!'
+    );
+  }
+
+  const phone = context.auth.token.phone_number;
+  const participantRef = admin.firestore().doc(`/participants/${phone}`);
+  let participantDetails: DocumentSnapshot;
+  let participantData: any;
+  try {
+    participantDetails = await participantRef.get();
+  } catch (error) {
+    functions.logger.error(error);
+    throw new functions.https.HttpsError(
+      'internal',
+      `Error occured at fetching participant data: ${error}`
+    );
+  }
+
+  if (!participantDetails.exists) {
+    throw new functions.https.HttpsError(
+      'unauthenticated',
+      'You are not authorized to take the quiz'
+    );
+  } else {
+    participantData = participantDetails.data();
+  }
+
+  // if (participantData?.round1) {
+  const noOfQs = (
+    await admin.firestore().doc('/questions/counter').get()
+  ).data().count;
+  const randomQIds = _.sampleSize(_.range(1, noOfQs + 1), 20);
+
+  participantData.round1 = {
+    data: randomQIds.map((i: number) => {
+      return {
+        questionId: i,
+        answerId: '',
+        correct: false,
+        timeTaken: 0
+      };
+    })
+  };
+  await participantRef.set(participantData, { merge: true });
+
+  const randomQs1 = (
+    await admin
+      .firestore()
+      .collection('/questions')
+      .where('index', 'in', _.chunk(randomQIds, 10)[0])
+      .get()
+  ).docs.map((d) => {
+    const question = d.data();
+    _.unset(question, 'correct');
+    return question;
+  });
+  const randomQs2 = (
+    await admin
+      .firestore()
+      .collection('/questions')
+      .where('index', 'in', _.chunk(randomQIds, 10)[1])
+      .get()
+  ).docs.map((d) => {
+    const question = d.data();
+    _.unset(question, 'correct');
+    return question;
+  });
+  const randomQs = [...randomQs1, ...randomQs2];
+  return randomQs;
+  //  }
 });
