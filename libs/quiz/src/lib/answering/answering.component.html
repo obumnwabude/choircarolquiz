@@ -1,1 +1,32 @@
-<p>answering works!</p>
+<mat-progress-bar
+  color="accent"
+  mode="determinate"
+  value="40"
+></mat-progress-bar>
+
+<div class="max-w-screen-sm mx-auto mt-8 mb-12 px-8">
+  <h2 class="font-bold text-2xl underline">Question 1</h2>
+  <p class="mb-8">
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga provident ad
+    nostrum architecto assumenda modi laborum fugit odio. Aliquid itaque animi
+    facilis officiis iste esse, architecto in inventore fugit ipsum!
+  </p>
+  <mat-radio-group (ngModel)="(selectedAnswer)">
+    <div
+      *ngFor="let answer of answers"
+      class="answer py-3 px-4 mb-5 mx-auto border-2 border-gray-300 flex"
+      (click)="selectAnswer(answer.index)"
+      [class.selected]="answer.index === selectedAnswer"
+    >
+      <mat-radio-button
+        [value]="answer.index"
+        [checked]="answer.checked"
+      ></mat-radio-button>
+      <span>{{ answer.value }}</span>
+    </div>
+  </mat-radio-group>
+
+  <div class="text-center pt-2">
+    <button mat-raised-button color="accent">Check</button>
+  </div>
+</div>

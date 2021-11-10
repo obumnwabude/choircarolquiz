@@ -1,0 +1,13 @@
+mat-progress-bar {
+  position: fixed;
+}
+
+.answer {
+  border-radius: 10px;
+  max-width: 384px;
+}
+
+.answer.selected {
+  border-color: #40C4FF;
+  box-shadow: 0 0 4px 2px #ccedfb;
+}

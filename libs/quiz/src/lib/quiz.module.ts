@@ -18,6 +18,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {
+  MatRadioModule,
+  MAT_RADIO_DEFAULT_OPTIONS
+} from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { CountdownModule } from '@ccq/countdown';
 import { environment } from '@ccq/ccq/env';
@@ -26,7 +30,10 @@ import {
   SignInComponent,
   UnauthorizedDialogComponent
 } from './sign-in/sign-in.component';
-import { AboutRoundComponent, LandingComponent } from './landing/landing.component';
+import {
+  AboutRoundComponent,
+  LandingComponent
+} from './landing/landing.component';
 import {
   LeaderboardsComponent,
   NoDataDialogComponent
@@ -95,6 +102,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatDividerModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
     MatSelectModule,
     CountdownModule
   ],
@@ -107,6 +115,10 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     {
       provide: USE_FUNCTIONS_EMULATOR,
       useValue: environment.production ? undefined : ['localhost', 5001]
+    },
+    {
+      provide: MAT_RADIO_DEFAULT_OPTIONS,
+      useValue: { color: 'accent' }
     }
   ]
 })
