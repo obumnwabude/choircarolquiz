@@ -1,13 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { LeaderboardRecord } from '@ccq/data';
-
-@Component({
-  templateUrl: './no-data-dialog.component.html',
-  styles: ['.ccq-section-heading { margin-top: 32px; }']
-})
-export class NoDataDialogComponent {}
 
 @Component({
   templateUrl: './leaderboards.component.html',
@@ -34,15 +27,9 @@ export class LeaderboardsComponent implements OnDestroy {
   ];
   selected_round = 'round_one';
 
-  constructor(public dialog: MatDialog, private title: Title) {
+  constructor(private title: Title) {
     this.prevTitle = this.title.getTitle();
     this.title.setTitle(`Leaderboards | ${this.prevTitle}`);
-    this.dialog.open(NoDataDialogComponent, {
-      autoFocus: true,
-      closeOnNavigation: true,
-      disableClose: true,
-      hasBackdrop: true
-    });
   }
 
   ngOnDestroy(): void {

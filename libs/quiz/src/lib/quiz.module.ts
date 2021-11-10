@@ -24,7 +24,10 @@ import {
   MAT_RADIO_DEFAULT_OPTIONS
 } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import {
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS
+} from '@angular/material/snack-bar';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { CountdownModule } from '@ccq/countdown';
 import { environment } from '@ccq/ccq/env';
@@ -37,10 +40,7 @@ import {
   AboutRoundComponent,
   LandingComponent
 } from './landing/landing.component';
-import {
-  LeaderboardsComponent,
-  NoDataDialogComponent
-} from './leaderboards/leaderboards.component';
+import { LeaderboardsComponent } from './leaderboards/leaderboards.component';
 import { AnsweringComponent } from './answering/answering.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
@@ -63,7 +63,6 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AboutRoundComponent,
     LandingComponent,
     LeaderboardsComponent,
-    NoDataDialogComponent,
     SignInComponent,
     UnauthorizedDialogComponent,
     AnsweringComponent
