@@ -12,6 +12,7 @@ import {
   NEW_ORIGIN_BEHAVIOR,
   USE_EMULATOR as USE_FUNCTIONS_EMULATOR
 } from '@angular/fire/functions';
+import { FormsModule } from '@angular/forms';
 import { firebase, FirebaseUIModule } from 'firebaseui-angular';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -41,7 +42,10 @@ import {
   LandingComponent
 } from './landing/landing.component';
 import { LeaderboardsComponent } from './leaderboards/leaderboards.component';
-import { AnsweringComponent } from './answering/answering.component';
+import {
+  AnsweringComponent,
+  CongratulationsComponent
+} from './answering/answering.component';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInOptions: [
@@ -61,6 +65,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
 @NgModule({
   declarations: [
     AboutRoundComponent,
+    CongratulationsComponent,
     LandingComponent,
     LeaderboardsComponent,
     SignInComponent,
@@ -99,6 +104,7 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     ]),
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     AngularFireFunctionsModule,
+    FormsModule,
     MatButtonModule,
     MatDialogModule,
     MatDividerModule,

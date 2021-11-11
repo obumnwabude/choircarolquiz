@@ -77,6 +77,10 @@
           "function": "checkParticipant"
         },
         {
+          "source": "/finishQuiz",
+          "function": "finishQuiz"
+        },
+        {
           "source": "**",
           "destination": "/index.html"
         }

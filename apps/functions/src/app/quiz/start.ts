@@ -15,7 +15,6 @@ export const start = functions.https.onCall(async (__, context) => {
   const phone = context.auth.token.phone_number;
   const participantRef = admin.firestore().doc(`/participants/${phone}`);
   let participantDetails: DocumentSnapshot;
-  let participantData: any;
   try {
     participantDetails = await participantRef.get();
   } catch (error) {
@@ -31,10 +30,9 @@ export const start = functions.https.onCall(async (__, context) => {
       'unauthenticated',
       'You are not authorized to take the quiz'
     );
-  } else {
-    participantData = participantDetails.data();
   }
 
+  const participantData = participantDetails.data();
   let randomQIds: number[];
   if (!participantData?.round1) {
     const totalNoOfQs = (
@@ -62,7 +60,7 @@ export const start = functions.https.onCall(async (__, context) => {
     await admin
       .firestore()
       .collection('/questions')
-      .where('index', 'in', _.chunk(randomQIds, 10)[0])
+      .where('index', 'in', _.chunk(randomQIds, Q_PER_1ST_ROUND / 2)[0])
       .get()
   ).docs.map((d) => {
     const question = d.data() as Question;
@@ -70,12 +68,12 @@ export const start = functions.https.onCall(async (__, context) => {
     return question;
   });
   let randomQs2: QuestionToParticipant[] = [];
-  if (randomQIds.length > 10) {
+  if (randomQIds.length > Q_PER_1ST_ROUND / 2) {
     randomQs2 = (
       await admin
         .firestore()
         .collection('/questions')
-        .where('index', 'in', _.chunk(randomQIds, 10)[1])
+        .where('index', 'in', _.chunk(randomQIds, Q_PER_1ST_ROUND / 2)[1])
         .get()
     ).docs.map((d) => {
       const question = d.data() as Question;
@@ -83,9 +81,8 @@ export const start = functions.https.onCall(async (__, context) => {
       return question;
     });
   }
-  const randomQs: QuestionToParticipant[] = _.shuffle([
-    ...randomQs1,
-    ...randomQs2
-  ]);
+
+  let randomQs: QuestionToParticipant[] = [...randomQs1, ...randomQs2];
+  randomQs = _.shuffle(randomQs);
   return randomQs;
 });
