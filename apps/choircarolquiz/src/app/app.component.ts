@@ -24,6 +24,7 @@ export class AppComponent implements AfterViewInit, OnInit {
   SPINNER = SPINNER;
   THEMES = THEMES;
   isSignedIn = false;
+  isTakingQuiz = false;
   @HostBinding('class') public theme = DEFAULT_THEME;
   @ViewChild('snav') snav: MatDrawer;
 
@@ -37,7 +38,12 @@ export class AppComponent implements AfterViewInit, OnInit {
   ngAfterViewInit(): void {
     this.router.events
       .pipe(filter((e) => e instanceof NavigationEnd))
-      .subscribe(() => this.snav.close());
+      .subscribe((e) => {
+        this.snav.close();
+        this.isTakingQuiz = /^\/quiz\/round/.test(
+          (e as NavigationEnd).urlAfterRedirects.split('?')[0].split('#')[0]
+        );
+      });
   }
 
   ngOnInit(): void {
