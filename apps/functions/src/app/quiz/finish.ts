@@ -49,7 +49,11 @@ export const finish = functions.https.onCall(async (_, context) => {
     .reduce((a, b) => a + b);
   const points = pointScore + pointTime;
 
-  participantData.result1 = { score, points };
+  participantData.result1 = {
+    points,
+    score,
+    time: admin.firestore.FieldValue.serverTimestamp()
+  };
   try {
     await participantRef.set(participantData, { merge: true });
   } catch (error) {
