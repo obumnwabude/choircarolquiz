@@ -15,16 +15,6 @@
   >
     <mat-nav-list>
       <a mat-list-item routerLink="/">Home</a>
-      <a
-        mat-list-item
-        href="https://api.whatsapp.com/send?phone=2347033777385&text=Hi%20Obum.%0D%0AI%20came%20from%20the%20Christmas%20Cantata%20Quiz%20website.%0D%0AI%20want%20to%20register%20for%20the%20quiz.%0D%0AMy%20full%20name%20is%20"
-        color="primary"
-        target="_blank"
-        rel="noopener noreferrer"
-        *ngIf="!isSignedIn"
-      >
-        Register
-      </a>
       <a mat-list-item routerLink="/quiz">Take Quiz</a>
       <a mat-list-item routerLink="/quiz/leaderboards">Leaderboards</a>
       <button mat-list-item (click)="signOut()" *ngIf="isSignedIn">
@@ -78,26 +68,7 @@
       >
         Sign Out
       </button>
-      <a
-        mat-raised-button
-        *ngIf="!isSignedIn"
-        id="nav-register-button"
-        href="https://api.whatsapp.com/send?phone=2347033777385&text=Hi%20Obum.%0D%0AI%20came%20from%20the%20Christmas%20Cantata%20Quiz%20website.%0D%0AI%20want%20to%20register%20for%20the%20quiz.%0D%0AMy%20full%20name%20is%20"
-        color="primary"
-        target="_blank"
-        rel="noopener noreferrer"
-        [class.hidden]="isTakingQuiz"
-      >
-        Register
-      </a>
-      <button
-        class="ccq-desktop-nav-item"
-        id="nav-theme-button"
-        [class.show-in-mobile]="isSignedIn"
-        mat-icon-button
-        (click)="changeTheme()"
-        title="Switch Theme"
-      >
+      <button mat-icon-button (click)="changeTheme()" title="Switch Theme">
         <mat-icon>{{
           THEMES.indexOf(theme) === 0 ? THEMES[1] : THEMES[0]
         }}</mat-icon>

@@ -51,10 +51,6 @@ mat-toolbar.footer {
   .ccq-desktop-nav-item {
     display: none;
   }
-
-  .show-in-mobile {
-    display: unset;
-  }
 }
 
 @media (min-width: 768px) {
@@ -67,12 +63,7 @@ mat-toolbar.footer {
     display: unset;
   }
 
-  #nav-register-button,
   .ccq-desktop-nav-item {
     margin-right: 12px;
-  }
-
-  #nav-theme-button {
-    margin-right: 0;
   }
 }
