@@ -8,6 +8,14 @@ export const check = functions.https.onCall(async (data, context) => {
       'unauthenticated',
       'Please Sign In First!'
     );
+  } else if (
+    Number.isNaN(data?.round) ||
+    ![1, 2].includes(Number(data?.round))
+  ) {
+    throw new functions.https.HttpsError(
+      'invalid-argument',
+      'Please provide valid round'
+    );
   }
 
   const phone = context.auth.token.phone_number;
@@ -23,6 +31,9 @@ export const check = functions.https.onCall(async (data, context) => {
     );
   }
 
+  if (!participantDetails.exists) return false;
   const participantData = participantDetails.data();
-  return !participantDetails.exists || !participantData.result1;
+  return Number(data.round) === 1
+    ? !participantData?.results?.one
+    : participantData?.results?.one?.score >= 50;
 });

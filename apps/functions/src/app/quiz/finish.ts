@@ -3,11 +3,19 @@ import { DocumentSnapshot } from 'firebase-functions/v1/firestore';
 import { SECS_PER_Q_1ST_ROUND } from '@ccq/data';
 import admin from '../admin';
 
-export const finish = functions.https.onCall(async (_, context) => {
+export const finish = functions.https.onCall(async (data, context) => {
   if (!context?.auth?.token?.phone_number) {
     throw new functions.https.HttpsError(
       'unauthenticated',
       'Please Sign In First!'
+    );
+  } else if (
+    Number.isNaN(data?.round) ||
+    ![1, 2].includes(Number(data?.round))
+  ) {
+    throw new functions.https.HttpsError(
+      'invalid-argument',
+      'Please provide valid round'
     );
   }
 
@@ -25,12 +33,13 @@ export const finish = functions.https.onCall(async (_, context) => {
   }
 
   const participantData = participantDetails.data();
-  const leftOverQs = participantData?.round1.data.filter(
+  const round = Number(data.round) === 1 ? 'one' : 'two';
+  const leftOverQs = participantData?.rounds?.[round]?.data.filter(
     (d) => d.answerId === '' && d.timeTaken === 0
   );
   if (
     !participantDetails.exists ||
-    !participantData?.round1 ||
+    !participantData?.rounds?.[round] ||
     leftOverQs.length > 0
   ) {
     throw new functions.https.HttpsError(
@@ -39,17 +48,18 @@ export const finish = functions.https.onCall(async (_, context) => {
     );
   }
 
-  const roundInfo = participantData.round1.data;
+  const roundInfo = participantData.rounds[round].data;
   const score =
     (roundInfo.filter((d) => d.correct).length / roundInfo.length) * 100;
-  const pointScore = score * 10;
+  const pointScore = Math.round(score * 10);
   const pointTime = roundInfo
     .filter((d) => d.correct)
     .map((d) => (SECS_PER_Q_1ST_ROUND - d.timeTaken) * 5)
     .reduce((a, b) => a + b);
-  const points = pointScore + pointTime;
+  const points = Math.round(pointScore + pointTime);
 
-  participantData.result1 = {
+  if (!participantData?.results) participantData.results = {};
+  participantData.results[round] = {
     points,
     score,
     time: admin.firestore.FieldValue.serverTimestamp()
@@ -69,7 +79,7 @@ export const finish = functions.https.onCall(async (_, context) => {
       .firestore()
       .doc('/participants/counter')
       .set(
-        { round1: admin.firestore.FieldValue.increment(1) },
+        { rounds: { [round]: admin.firestore.FieldValue.increment(1) } },
         { merge: true }
       );
   } catch (error) {

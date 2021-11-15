@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { MatButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatRadioButton } from '@angular/material/radio';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import {
   AnswerToParticipant,
   QuestionToParticipant,
@@ -28,14 +29,16 @@ export class CongratulationsComponent {
   templateUrl: './answering.component.html',
   styleUrls: ['./answering.component.scss']
 })
-export class AnsweringComponent implements OnInit {
+export class AnsweringComponent implements OnDestroy, OnInit {
   answers: AnswerToParticipant[] = [];
   correctIndex = '';
   countdownInterval: number;
   currentQ = 0;
   hasSetQuestions = false;
   isInCheck = false;
+  prevTitle: string;
   questions: QuestionToParticipant[] = [TEMPLATE_QUESTION];
+  round: number;
   selectedIndex = '';
   secondsLeft = SECS_PER_Q_1ST_ROUND;
 
@@ -47,21 +50,30 @@ export class AnsweringComponent implements OnInit {
     public dialog: MatDialog,
     private fns: AngularFireFunctions,
     private ngxLoader: NgxUiLoaderService,
+    private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private title: Title
   ) {}
 
   async ngOnInit(): Promise<void> {
     try {
       this.ngxLoader.start();
+      const round = this.route.snapshot.paramMap.get('round');
+      if (Number.isNaN(round) || ![1, 2].includes(Number(round)))
+        this.router.navigateByUrl('quiz/leaderboards');
+      this.round = Number(round);
+
+      this.prevTitle = this.title.getTitle();
+      this.title.setTitle(`Round ${round} | ${this.prevTitle}`);
 
       const eligible = await this.fns
-        .httpsCallable('checkEligibility')({})
+        .httpsCallable('checkEligibility')({ round })
         .toPromise();
       if (!eligible) this.router.navigateByUrl('quiz/leaderboards');
 
       this.questions = await this.fns
-        .httpsCallable('startQuiz')({})
+        .httpsCallable('startQuiz')({ round })
         .toPromise();
       this.answers = this.setAnswers(this.questions[this.currentQ]);
       this.hasSetQuestions = true;
@@ -76,11 +88,19 @@ export class AnsweringComponent implements OnInit {
           }
         }, 1000);
       }, 1500);
-    } catch (_) {
-      window.location.reload();
+    } catch (error) {
+      if ((error as { code: string })?.code === 'internal') {
+        window.location.reload();
+      } else {
+        this.router.navigateByUrl('quiz/leaderboards');
+      }
     } finally {
       this.ngxLoader.stop();
     }
+  }
+
+  ngOnDestroy(): void {
+    if (this.prevTitle) this.title.setTitle(this.prevTitle);
   }
 
   async checkAnswer(): Promise<void> {
@@ -90,6 +110,7 @@ export class AnsweringComponent implements OnInit {
       clearInterval(this.countdownInterval);
       this.correctIndex = await this.fns
         .httpsCallable('checkAnswer')({
+          round: this.round,
           questionId: this.questions[this.currentQ].index,
           timeTaken: SECS_PER_Q_1ST_ROUND - this.secondsLeft,
           answerId: this.selectedIndex
@@ -117,7 +138,9 @@ export class AnsweringComponent implements OnInit {
     if (this.currentQ + 1 <= this.questions.length && !this.isInCheck) return;
     try {
       this.ngxLoader.start();
-      const result = await this.fns.httpsCallable('finishQuiz')({}).toPromise();
+      const result = await this.fns
+        .httpsCallable('finishQuiz')({ round: this.round })
+        .toPromise();
       const congratsRef = this.dialog.open(CongratulationsComponent, {
         autoFocus: true,
         closeOnNavigation: true,

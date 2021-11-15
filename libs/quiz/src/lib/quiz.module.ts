@@ -95,10 +95,10 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
         )
       },
       {
-        path: 'round1',
+        path: 'round/:round',
         component: AnsweringComponent,
         ...canActivate(() =>
-          redirectUnauthorizedTo('/quiz/sign-in?next=%2Fquiz%2round1')
+          redirectUnauthorizedTo('/quiz/sign-in?next=%2Fquiz')
         )
       }
     ]),

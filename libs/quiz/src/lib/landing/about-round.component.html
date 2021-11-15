@@ -2,7 +2,7 @@
   <h2 class="ccq-section-heading">Let's Go!</h2>
 
   <ul class="pl-4 list-disc list-outside text-2xl mx-auto">
-    <li class="mb-4">You have 45 seconds to answer each question.</li>
+    <li class="mb-4">You have 20 seconds to answer each question.</li>
     <li class="mb-4">You can't go back to questions you've answered.</li>
     <li class="mb-4">If you are ready, you start immediately.</li>
   </ul>
@@ -11,7 +11,7 @@
     <a
       mat-raised-button
       matDialogClose
-      routerLink="/quiz/round1"
+      [routerLink]="'/quiz/round/' + round"
       color="primary"
       class="ready-button"
     >

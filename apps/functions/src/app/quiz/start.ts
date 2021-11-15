@@ -4,11 +4,19 @@ import { DocumentSnapshot } from 'firebase-functions/v1/firestore';
 import { Q_PER_1ST_ROUND, QuestionToParticipant, Question } from '@ccq/data';
 import admin from '../admin';
 
-export const start = functions.https.onCall(async (__, context) => {
+export const start = functions.https.onCall(async (data, context) => {
   if (!context?.auth?.token?.phone_number) {
     throw new functions.https.HttpsError(
       'unauthenticated',
       'Please Sign In First!'
+    );
+  } else if (
+    Number.isNaN(data?.round) ||
+    ![1, 2].includes(Number(data?.round))
+  ) {
+    throw new functions.https.HttpsError(
+      'invalid-argument',
+      'Provide valid round number'
     );
   }
 
@@ -33,13 +41,15 @@ export const start = functions.https.onCall(async (__, context) => {
   }
 
   const participantData = participantDetails.data();
+  const round = Number(data.round) === 1 ? 'one' : 'two';
   let randomQIds: number[];
-  if (!participantData?.round1) {
+  if (!participantData?.rounds?.[round]) {
     const totalNoOfQs = (
       await admin.firestore().doc('/questions/counter').get()
     ).data().count;
     randomQIds = _.sampleSize(_.range(1, totalNoOfQs + 1), Q_PER_1ST_ROUND);
-    participantData.round1 = {
+    if (!participantData?.rounds) participantData.rounds = {};
+    participantData.rounds[round] = {
       data: randomQIds.map((i: number) => {
         return {
           questionId: i,
@@ -50,8 +60,17 @@ export const start = functions.https.onCall(async (__, context) => {
       })
     };
     await participantRef.set(participantData, { merge: true });
+  } else if (
+    participantData.rounds[round].data.filter(
+      (d) => d.answerId === '' && d.timeTaken === 0
+    ).length === 0
+  ) {
+    throw new functions.https.HttpsError(
+      'unauthenticated',
+      "You shouldn't be here"
+    );
   } else {
-    randomQIds = participantData.round1.data
+    randomQIds = participantData.rounds[round].data
       .filter((d) => d.answerId === '' && d.timeTaken === 0)
       .map((d) => d.questionId);
   }

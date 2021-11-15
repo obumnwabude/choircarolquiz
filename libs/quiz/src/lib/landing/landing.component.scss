@@ -6,7 +6,7 @@
   max-width: 384px;
 }
 
-#leaderboard {
+.leaderboard {
   margin-right: 16px;
 }
 
@@ -32,7 +32,7 @@ mat-divider {
 }
 
 ::ng-deep.light_mode .ccq-round-three-icon svg {
-  fill: rgba(0, 0, 0, 0.5);
+  fill: black;
 }
 
 ::ng-deep.dark_mode .disabled {
@@ -40,7 +40,7 @@ mat-divider {
 }
 
 ::ng-deep.dark_mode .ccq-round-three-icon svg {
-  fill: rgba(255, 255, 255, 0.5);
+  fill: white;
 }
 
 .ccq-round-three-body {

@@ -9,6 +9,14 @@ export const check = functions.https.onCall(async (data, context) => {
       'unauthenticated',
       'Please Sign In First!'
     );
+  } else if (
+    Number.isNaN(data?.round) ||
+    ![1, 2].includes(Number(data?.round))
+  ) {
+    throw new functions.https.HttpsError(
+      'invalid-argument',
+      'Please provide valid round'
+    );
   } else if (Number.isNaN(data?.timeTaken)) {
     throw new functions.https.HttpsError(
       'invalid-argument',
@@ -46,6 +54,7 @@ export const check = functions.https.onCall(async (data, context) => {
   }
 
   const phone = context.auth.token.phone_number;
+  const round = Number(data.round) === 1 ? 'one' : 'two';
   const participantRef = admin.firestore().doc(`/participants/${phone}`);
   let participantDetails: DocumentSnapshot;
   try {
@@ -65,16 +74,16 @@ export const check = functions.https.onCall(async (data, context) => {
     );
   } else {
     const participantData = participantDetails.data();
-    participantData.round1.data.filter(
+    participantData.rounds[round].data.filter(
       (d) => d.questionId === Number(data.questionId)
     )[0].answerId = data?.answerId ?? '';
-    participantData.round1.data.filter(
+    participantData.rounds[round].data.filter(
       (d) => d.questionId === Number(data.questionId)
     )[0].correct = data?.answerId === question.correct;
-    participantData.round1.data.filter(
+    participantData.rounds[round].data.filter(
       (d) => d.questionId === Number(data.questionId)
     )[0].questionId = data.questionId;
-    participantData.round1.data.filter(
+    participantData.rounds[round].data.filter(
       (d) => d.questionId === Number(data.questionId)
     )[0].timeTaken = data.timeTaken;
 
