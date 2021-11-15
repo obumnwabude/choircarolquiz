@@ -44,7 +44,7 @@ export const QUESTIONS_PER_PAGE = 40;
 
 export const Q_PER_1ST_ROUND = 20;
 
-export const SECS_PER_Q_1ST_ROUND = 30;
+export const SECS_PER_Q_1ST_ROUND = 20;
 
 export const TEMPLATE_QUESTION: Question = {
   index: 1,
