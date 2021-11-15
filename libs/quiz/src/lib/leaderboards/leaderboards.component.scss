@@ -7,15 +7,5 @@ ol {
 }
 
 .record-name {
-  border-radius: 16px;
-  height: 32px;
   margin-bottom: 4px;
-}
-
-::ng-deep.dark_mode .record-name {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-::ng-deep.light_mode .record-name {
-  background-color: rgba(0, 0, 0, 0.2);
 }

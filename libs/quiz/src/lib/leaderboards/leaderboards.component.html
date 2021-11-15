@@ -3,13 +3,16 @@
     <mat-form-field appearance="fill">
       <mat-label>Select Round</mat-label>
       <mat-select disabled [(value)]="selected_round">
-        <mat-option value="round_one">Round One</mat-option>
+        <mat-option [value]="1">Round One</mat-option>
+        <mat-option [value]="2">Round Two</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
 
   <h2 class="ccq-section-heading" id="leaderboard-heading">Leaderboard</h2>
 
+  <!--the record.points / 20 represents record.points * 100 / 2000
+    where 2000 is the max points obtainable -->
   <div class="px-8">
     <ol class="list-decimal list-outside text-xl mx-auto">
       <li class="pb-8 pl-6" *ngFor="let record of records; last as last">
@@ -19,7 +22,7 @@
           <mat-progress-bar
             mode="determinate"
             color="accent"
-            [value]="record.points / 10"
+            [value]="record.points / 20"
           ></mat-progress-bar>
           <span class="ml-2">{{ record.points }}</span>
         </p>
@@ -35,6 +38,5 @@
         <mat-divider *ngIf="!last"></mat-divider>
       </li>
     </ol>
-    <p class="my-4 text-5xl font-bold text-center">. . .</p>
   </div>
 </section>

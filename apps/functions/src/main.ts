@@ -5,6 +5,7 @@ import { check as checkAnswer } from './app/quiz/check-answer';
 import { check as checkEligibility } from './app/quiz/check-eligibility';
 import { finish } from './app/quiz/finish';
 import { start } from './app/quiz/start';
+import { leaderboards } from './app/quiz/leaderboards';
 
 exports.incrementQuestionCounter = incQ;
 exports.decrementQuestionCounter = decQ;
@@ -16,3 +17,4 @@ exports.checkAnswer = checkAnswer;
 exports.checkEligibility = checkEligibility;
 exports.finishQuiz = finish;
 exports.startQuiz = start;
+exports.leaderboards = leaderboards;

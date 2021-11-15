@@ -49,14 +49,15 @@ export const finish = functions.https.onCall(async (data, context) => {
   }
 
   const roundInfo = participantData.rounds[round].data;
-  const score =
-    (roundInfo.filter((d) => d.correct).length / roundInfo.length) * 100;
-  const pointScore = Math.round(score * 10);
-  const pointTime = roundInfo
-    .filter((d) => d.correct)
-    .map((d) => (SECS_PER_Q_1ST_ROUND - d.timeTaken) * 5)
-    .reduce((a, b) => a + b);
-  const points = Math.round(pointScore + pointTime);
+  const score = Math.round(
+    (roundInfo.filter((d) => d.correct).length / roundInfo.length) * 100
+  );
+  const points = Math.round(
+    roundInfo
+      .filter((d) => d.correct)
+      .map((d) => (SECS_PER_Q_1ST_ROUND - d.timeTaken) * 5)
+      .reduce((a, b) => a + b)
+  );
 
   if (!participantData?.results) participantData.results = {};
   participantData.results[round] = {

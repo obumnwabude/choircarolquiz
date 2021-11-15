@@ -1,35 +1,39 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AngularFireFunctions } from '@angular/fire/functions';
 import { Title } from '@angular/platform-browser';
 import { LeaderboardRecord } from '@ccq/data';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   templateUrl: './leaderboards.component.html',
   styleUrls: ['./leaderboards.component.scss']
 })
-export class LeaderboardsComponent implements OnDestroy {
+export class LeaderboardsComponent implements OnDestroy, OnInit {
   prevTitle: string;
-  records: LeaderboardRecord[] = [
-    {
-      name: '',
-      points: 900,
-      score: 50
-    },
-    {
-      name: '',
-      points: 900,
-      score: 50
-    },
-    {
-      name: '',
-      points: 900,
-      score: 50
-    }
-  ];
-  selected_round = 'round_one';
+  records: LeaderboardRecord[] = [];
+  selected_round = 1;
 
-  constructor(private title: Title) {
+  constructor(
+    private fns: AngularFireFunctions,
+    private ngxLoader: NgxUiLoaderService,
+    private title: Title
+  ) {
     this.prevTitle = this.title.getTitle();
     this.title.setTitle(`Leaderboards | ${this.prevTitle}`);
+  }
+
+  async ngOnInit(): Promise<void> {
+    try {
+      this.ngxLoader.start();
+      this.records = await this.fns
+        .httpsCallable('leaderboards')({
+          round: this.selected_round
+        })
+        .toPromise();
+      this.ngxLoader.stop();
+    } catch (_) {
+      window.location.reload();
+    }
   }
 
   ngOnDestroy(): void {
