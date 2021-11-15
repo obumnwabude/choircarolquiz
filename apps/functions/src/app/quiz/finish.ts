@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions';
 import { DocumentSnapshot } from 'firebase-functions/v1/firestore';
-import { SECS_PER_Q_1ST_ROUND } from '@ccq/data';
+import { SECS_PER_QUESTION } from '@ccq/data';
 import admin from '../admin';
 
 export const finish = functions.https.onCall(async (data, context) => {
@@ -55,7 +55,7 @@ export const finish = functions.https.onCall(async (data, context) => {
   const points = Math.round(
     roundInfo
       .filter((d) => d.correct)
-      .map((d) => (SECS_PER_Q_1ST_ROUND - d.timeTaken) * 5)
+      .map((d) => (SECS_PER_QUESTION - d.timeTaken) * 5)
       .reduce((a, b) => a + b)
   );
 

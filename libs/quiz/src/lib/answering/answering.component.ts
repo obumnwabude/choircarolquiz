@@ -9,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 import {
   AnswerToParticipant,
   QuestionToParticipant,
-  SECS_PER_Q_1ST_ROUND,
+  SECS_PER_QUESTION,
   TEMPLATE_QUESTION
 } from '@ccq/data';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -40,7 +40,7 @@ export class AnsweringComponent implements OnDestroy, OnInit {
   questions: QuestionToParticipant[] = [TEMPLATE_QUESTION];
   round: number;
   selectedIndex = '';
-  secondsLeft = SECS_PER_Q_1ST_ROUND;
+  secondsLeft = SECS_PER_QUESTION;
 
   @ViewChild('finishButton') finishButton: MatButton;
   @ViewChild('nextButton') nextButton: MatButton;
@@ -112,7 +112,7 @@ export class AnsweringComponent implements OnDestroy, OnInit {
         .httpsCallable('checkAnswer')({
           round: this.round,
           questionId: this.questions[this.currentQ].index,
-          timeTaken: SECS_PER_Q_1ST_ROUND - this.secondsLeft,
+          timeTaken: SECS_PER_QUESTION - this.secondsLeft,
           answerId: this.selectedIndex
         })
         .toPromise();
@@ -166,7 +166,7 @@ export class AnsweringComponent implements OnDestroy, OnInit {
     this.currentQ++;
     this.isInCheck = false;
     this.selectedIndex = '';
-    this.secondsLeft = SECS_PER_Q_1ST_ROUND;
+    this.secondsLeft = SECS_PER_QUESTION;
     this.answers = this.setAnswers(this.questions[this.currentQ]);
     this.countdownInterval = window.setInterval(() => {
       this.secondsLeft--;
