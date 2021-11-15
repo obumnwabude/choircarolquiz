@@ -64,5 +64,21 @@ export const finish = functions.https.onCall(async (_, context) => {
     );
   }
 
+  try {
+    await admin
+      .firestore()
+      .doc('/participants/counter')
+      .set(
+        { round1: admin.firestore.FieldValue.increment(1) },
+        { merge: true }
+      );
+  } catch (error) {
+    functions.logger.error(error);
+    throw new functions.https.HttpsError(
+      'internal',
+      `Error occured at incrementing round participant count: ${error}`
+    );
+  }
+
   return { score, points };
 });
