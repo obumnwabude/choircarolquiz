@@ -73,6 +73,10 @@
           "function": "checkAnswer"
         },
         {
+          "source": "/checkEligibility",
+          "function": "checkEligibility"
+        },
+        {
           "source": "/checkParticipant",
           "function": "checkParticipant"
         },

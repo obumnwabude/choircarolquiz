@@ -44,15 +44,22 @@ export class AnsweringComponent implements OnInit {
   @ViewChild(MatRadioButton) radio: MatRadioButton;
 
   constructor(
+    public dialog: MatDialog,
     private fns: AngularFireFunctions,
     private ngxLoader: NgxUiLoaderService,
-    private snackBar: MatSnackBar,
-    public dialog: MatDialog
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   async ngOnInit(): Promise<void> {
     try {
       this.ngxLoader.start();
+
+      const eligible = await this.fns
+        .httpsCallable('checkEligibility')({})
+        .toPromise();
+      if (!eligible) this.router.navigateByUrl('quiz/leaderboards');
+
       this.questions = await this.fns
         .httpsCallable('startQuiz')({})
         .toPromise();

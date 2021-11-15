@@ -48,7 +48,6 @@ export const check = functions.https.onCall(async (data, context) => {
   const phone = context.auth.token.phone_number;
   const participantRef = admin.firestore().doc(`/participants/${phone}`);
   let participantDetails: DocumentSnapshot;
-  let participantData: any;
   try {
     participantDetails = await participantRef.get();
   } catch (error) {
@@ -65,7 +64,7 @@ export const check = functions.https.onCall(async (data, context) => {
       "You shouldn't be here"
     );
   } else {
-    participantData = participantDetails.data();
+    const participantData = participantDetails.data();
     participantData.round1.data.filter(
       (d) => d.questionId === Number(data.questionId)
     )[0].answerId = data?.answerId ?? '';
