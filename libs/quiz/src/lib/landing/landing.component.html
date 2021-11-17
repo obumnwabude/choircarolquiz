@@ -25,14 +25,14 @@
   >
     View Leaderboard
   </button>
-  <button
+  <!-- <button
     mat-raised-button
     color="primary"
     (click)="startRound(1)"
     *ngIf="round1Eligible"
   >
     Start Round 1
-  </button>
+  </button> -->
 </p>
 
 <mat-divider></mat-divider>
@@ -57,11 +57,6 @@
       </ul>
     </div>
   </section>
-
-  <ccq-countdown
-    targetName="round two"
-    [targetDate]="ROUND_TWO_DATE"
-  ></ccq-countdown>
 
   <p class="text-center mb-40">
     <button
