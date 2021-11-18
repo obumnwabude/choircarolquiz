@@ -23,6 +23,14 @@ export class LeaderboardsComponent implements OnDestroy, OnInit {
   }
 
   async ngOnInit(): Promise<void> {
+    this.refreshRecords();
+  }
+
+  ngOnDestroy(): void {
+    this.title.setTitle(this.prevTitle);
+  }
+
+  async refreshRecords(): Promise<void> {
     try {
       this.ngxLoader.start();
       this.records = await this.fns
@@ -34,9 +42,5 @@ export class LeaderboardsComponent implements OnDestroy, OnInit {
     } catch (_) {
       window.location.reload();
     }
-  }
-
-  ngOnDestroy(): void {
-    this.title.setTitle(this.prevTitle);
   }
 }
