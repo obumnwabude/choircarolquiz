@@ -6,68 +6,10 @@
 </ngx-ui-loader>
 
 <mat-sidenav-container>
-  <mat-sidenav
-    #snav
-    [fixedInViewport]="true"
-    fixedTopGap="56"
-    class="p-6"
-    [class.hidden]="isTakingQuiz"
-  >
-    <mat-nav-list>
-      <a mat-list-item routerLink="/">Home</a>
-      <a mat-list-item routerLink="/quiz">Take Quiz</a>
-      <a mat-list-item routerLink="/quiz/leaderboards">Leaderboards</a>
-      <button mat-list-item (click)="signOut()" *ngIf="isSignedIn">
-        Sign Out
-      </button>
-      <button mat-list-item (click)="changeTheme()" title="Switch Theme">
-        {{ THEMES.indexOf(theme) === 0 ? 'Dark Theme' : 'Light Theme' }}
-      </button>
-    </mat-nav-list>
-  </mat-sidenav>
-
   <mat-sidenav-content>
     <mat-toolbar class="header mat-elevation-z3">
-      <button
-        mat-icon-button
-        (click)="snav.toggle()"
-        class="ccq-menu-button"
-        [class.hidden]="isTakingQuiz"
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>Christmas <span id="nav-cantata-text">Cantata </span>Quiz</span>
+      <span>Christmas Cantata</span>
       <span class="spacer"></span>
-      <a
-        mat-stroked-button
-        routerLink="/"
-        class="ccq-desktop-nav-item"
-        [class.hidden]="isTakingQuiz"
-        >Home</a
-      >
-      <a
-        mat-stroked-button
-        routerLink="/quiz"
-        class="ccq-desktop-nav-item"
-        [class.hidden]="isTakingQuiz"
-        >Take Quiz</a
-      >
-      <a
-        mat-stroked-button
-        routerLink="/quiz/leaderboards"
-        class="ccq-desktop-nav-item"
-        [class.hidden]="isTakingQuiz"
-        >Leaderboards</a
-      >
-      <button
-        mat-stroked-button
-        (click)="signOut()"
-        class="ccq-desktop-nav-item"
-        *ngIf="isSignedIn"
-        [class.hidden]="isTakingQuiz"
-      >
-        Sign Out
-      </button>
       <button mat-icon-button (click)="changeTheme()" title="Switch Theme">
         <mat-icon>{{
           THEMES.indexOf(theme) === 0 ? THEMES[1] : THEMES[0]

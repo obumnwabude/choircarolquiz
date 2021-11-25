@@ -65,30 +65,6 @@
       ],
       "rewrites": [
         {
-          "source": "/startQuiz",
-          "function": "startQuiz"
-        },
-        {
-          "source": "/checkAnswer",
-          "function": "checkAnswer"
-        },
-        {
-          "source": "/checkEligibility",
-          "function": "checkEligibility"
-        },
-        {
-          "source": "/checkParticipant",
-          "function": "checkParticipant"
-        },
-        {
-          "source": "/finishQuiz",
-          "function": "finishQuiz"
-        },
-        {
-          "source": "/leaderboards",
-          "function": "leaderboards"
-        },
-        {
           "source": "**",
           "destination": "/index.html"
         }

@@ -6,10 +6,7 @@ import {
   AngularFireAnalyticsModule,
   ScreenTrackingService
 } from '@angular/fire/analytics';
-import {
-  AngularFireAuthModule,
-  USE_EMULATOR as USE_AUTH_EMULATOR
-} from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,17 +15,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule, Routes } from '@angular/router';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
-import { CountdownModule } from '@ccq/countdown';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { environment } from '../environments/environment';
 
 const routes: Routes = [
   { path: 'cantata', component: HomePageComponent },
-  {
-    path: 'quiz',
-    loadChildren: () => import('@ccq/quiz').then((m) => m.QuizModule)
-  },
   { path: '**', redirectTo: '/cantata', pathMatch: 'full' }
 ];
 
@@ -48,17 +40,9 @@ const routes: Routes = [
     MatSidenavModule,
     MatToolbarModule,
     NgxUiLoaderModule,
-    NgxUiLoaderRouterModule,
-    CountdownModule
+    NgxUiLoaderRouterModule
   ],
-  providers: [
-    ScreenTrackingService,
-    {
-      provide: USE_AUTH_EMULATOR,
-      useValue: environment.production ? undefined : ['localhost', 9099]
-    },
-    Title
-  ],
+  providers: [ScreenTrackingService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
