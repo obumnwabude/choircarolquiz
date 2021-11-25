@@ -16,7 +16,11 @@
     "strictNullChecks": false,
     "baseUrl": ".",
     "paths": {
-      "@ccq/data": ["libs/data/src/index.ts"]
+      "@ccq/ccq/env": ["apps/choircarolquiz/src/environments/environment.ts"],
+      "@ccq/data": ["libs/data/src/index.ts"],
+      "@ccq/quiz": ["libs/quiz/src/index.ts"],
+      "@ccq/theming": ["apps/choircarolquiz/src/app/theming.service.ts"],
+      "@ccq/countdown": ["libs/countdown/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

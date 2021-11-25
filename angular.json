@@ -11,6 +11,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "outputs": ["{options.outputPath}"],
           "options": {
+            "showCircularDependencies": false,
             "outputPath": "dist/apps/ccqadmin",
             "index": "apps/ccqadmin/src/index.html",
             "main": "apps/ccqadmin/src/main.ts",
@@ -215,6 +216,7 @@
             "styles": [
               "apps/choircarolquiz/src/assets/flipdown.min.css",
               "./node_modules/aos/dist/aos.css",
+              "./node_modules/firebaseui/dist/firebaseui.css",
               "apps/choircarolquiz/src/styles.scss"
             ],
             "scripts": ["apps/choircarolquiz/src/assets/flipdown.js"]
@@ -293,6 +295,31 @@
         }
       }
     },
+    "countdown": {
+      "projectType": "library",
+      "root": "libs/countdown",
+      "sourceRoot": "libs/countdown/src",
+      "prefix": "ccq",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/countdown"],
+          "options": {
+            "jestConfig": "libs/countdown/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/countdown/src/**/*.ts",
+              "libs/countdown/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "data": {
       "root": "libs/data",
       "sourceRoot": "libs/data/src",
@@ -365,6 +392,31 @@
           }
         }
       }
+    },
+    "quiz": {
+      "projectType": "library",
+      "root": "libs/quiz",
+      "sourceRoot": "libs/quiz/src",
+      "prefix": "ccq",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/quiz"],
+          "options": {
+            "jestConfig": "libs/quiz/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/quiz/src/**/*.ts",
+              "libs/quiz/src/**/*.html"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -398,5 +450,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "ccqadmin"
+  "defaultProject": "choircarolquiz"
 }

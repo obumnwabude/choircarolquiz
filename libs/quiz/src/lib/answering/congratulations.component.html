@@ -1,0 +1,24 @@
+<div>
+  <h2 class="ccq-section-heading">Congratulations!!!</h2>
+
+  <ul class="pl-4 list-disc list-outside text-2xl mx-auto">
+    <li class="mb-4">
+      You did it! Thanks for taking part in the Christmas Cantata Quiz.
+    </li>
+    <li class="mb-4">Your Points: {{points}}</li>
+    <li class="mb-4">Your Score (on 100): {{score}}%</li>
+    <li class="mb-4">Check your position on the Leaderboard.</li>
+  </ul>
+
+  <p class="flex flex-row-reverse justify-center mt-8">
+    <a
+      mat-raised-button
+      matDialogClose
+      routerLink="/quiz/leaderboards"
+      color="primary"
+      class="ready-button"
+    >
+      View Leaderboard
+    </a>
+  </p>
+</div>

@@ -1,0 +1,18 @@
+<section class="max-w-screen-xl mx-auto my-12 px-4 md:px-8">
+  <h2 class="ccq-section-heading">Sign In</h2>
+  <p class="text-2xl text-center">
+    Welcome to the Cantata Quiz.<br />
+    Kindly verify your phone number to continue.
+  </p>
+  <div
+    class="sign-in flex justify-center mx-auto my-8"
+    [class.pt-8]="showLoading"
+  >
+    <mat-spinner *ngIf="showLoading"></mat-spinner>
+    <firebase-ui
+      (uiShown)="showLoading = false"
+      (signInSuccessWithAuthResult)="checkParticipant()"
+      (signInFailure)="window.location.reload()"
+    ></firebase-ui>
+  </div>
+</section>

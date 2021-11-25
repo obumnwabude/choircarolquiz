@@ -3,17 +3,14 @@
 @include mat-core();
 $ccq-primary: mat-palette($mat-red);
 $ccq-accent: mat-palette($mat-red, A200, A100, A400);
-$ccq-warn: mat-palette($mat-red);
-$ccq-theme: mat-light-theme(
-  (
-    color: (
-      primary: $ccq-primary,
-      accent: $ccq-accent,
-      warn: $ccq-warn
-    )
-  )
-);
-@include angular-material-theme($ccq-theme);
+
+.light_mode {
+  @include angular-material-theme(mat-light-theme($ccq-primary, $ccq-accent));
+}
+
+.dark_mode {
+  @include angular-material-theme(mat-dark-theme($ccq-primary, $ccq-accent));
+}
 
 * {
   box-sizing: border-box;

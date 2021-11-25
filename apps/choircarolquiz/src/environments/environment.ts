@@ -11,7 +11,7 @@ export const environment = {
     storageBucket: 'choircarolquiz.appspot.com',
     messagingSenderId: '378225639114',
     appId: '1:378225639114:web:c41e65e96cb5c1b952be33',
-    measurementId: 'G-H9D6GWSW4V'
+    measurementId: 'G-RJ24CL7V8V'
   }
 };
 

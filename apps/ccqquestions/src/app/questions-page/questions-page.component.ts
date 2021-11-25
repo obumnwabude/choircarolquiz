@@ -1,4 +1,10 @@
-import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostListener,
+  ViewChild,
+  HostBinding
+} from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatFabMenu } from '@angular-material-extensions/fab-menu';
 import { MatAccordion } from '@angular/material/expansion';
@@ -8,13 +14,19 @@ import { Subscription, of } from 'rxjs';
 import { concatMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-import { TEMPLATE_QUESTION, Question, QUESTIONS_PER_PAGE } from '@ccq/data';
+import {
+  TEMPLATE_QUESTION,
+  Question,
+  QUESTIONS_PER_PAGE,
+  LOCALSTORAGE_THEME_KEY
+} from '@ccq/data';
 import { FirestoreService } from '../firestore.service';
+import { DEFAULT_THEME, THEMES, ThemingService } from '../theming.service';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 declare let document: Document;
 
 @Component({
-  selector: 'ccq-questions-page',
   templateUrl: './questions-page.component.html',
   styleUrls: ['./questions-page.component.scss']
 })
@@ -27,17 +39,23 @@ export class QuestionsPageComponent implements OnInit {
   questionCountSub: Subscription = Subscription.EMPTY;
   questions: Question[] = [TEMPLATE_QUESTION];
 
+  @HostBinding('class') public theme = DEFAULT_THEME;
+
   fabButtons: MatFabMenu[] = [
     {
       id: 1,
-      icon: 'arrow_downward'
+      icon: this.theme == 'light_mode' ? 'dark_mode' : 'light_mode'
     },
     {
       id: 2,
-      icon: 'arrow_upward'
+      icon: 'arrow_downward'
     },
     {
       id: 3,
+      icon: 'arrow_upward'
+    },
+    {
+      id: 4,
       icon: 'add'
     }
   ];
@@ -62,12 +80,22 @@ export class QuestionsPageComponent implements OnInit {
     private auth: AngularFireAuth,
     private firestore: FirestoreService,
     private ngxLoader: NgxUiLoaderService,
+    private overlay: OverlayContainer,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public theming: ThemingService
   ) {}
 
   ngOnInit(): void {
     this.assignSubs();
+    this.theming.theme$.subscribe((theme: string) => {
+      this.theme = theme;
+      this.fabButtons[0].icon =
+        this.theme == 'light_mode' ? 'dark_mode' : 'light_mode';
+      const overlayClasses = this.overlay.getContainerElement().classList;
+      overlayClasses.remove(...Array.from(THEMES));
+      overlayClasses.add(this.theme);
+    });
   }
 
   async signOut(): Promise<void> {
@@ -130,6 +158,14 @@ export class QuestionsPageComponent implements OnInit {
     this.questionSub.unsubscribe();
   }
 
+  changeTheme(): void {
+    this.theme = THEMES.indexOf(this.theme) === 0 ? THEMES[1] : THEMES[0];
+    this.theming.theme$.next(this.theme);
+    localStorage.setItem(LOCALSTORAGE_THEME_KEY, this.theme);
+    this.fabButtons[0].icon =
+      this.theme == 'light_mode' ? 'dark_mode' : 'light_mode';
+  }
+
   changePage(event: number): void {
     this.ngxLoader.start();
     this.pageNumber = event;
@@ -138,8 +174,10 @@ export class QuestionsPageComponent implements OnInit {
 
   fabAction(event: number): void {
     if (event === 1) {
-      this.scrollToBottom();
+      this.changeTheme();
     } else if (event === 2) {
+      this.scrollToBottom();
+    } else if (event === 3) {
       this.scrollToTop();
     } else {
       const qL = this.questions.length;

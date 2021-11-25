@@ -1,9 +1,4 @@
-<div class="my-16" data-aos="fade-up">
-  <h2 class="text-3xl font-bold text-center mb-4 mx-auto underline">
-    CANTATA IN
-  </h2>
-  <div #flipdown class="flipdown mx-auto"></div>
-</div>
+<ccq-countdown targetName="cantata" [targetDate]="CANTATA_DATE"></ccq-countdown>
 
 <mat-divider></mat-divider>
 
@@ -11,7 +6,7 @@
   <h2 class="ccq-section-heading">About Christmas Cantata</h2>
   <div class="ccq-about-cantata mb-16" data-aos="fade-up">
     <div class="ccq-about-cantata-icon">
-      <svg aria-hidden="true" alt="" style="width: 172px; height: 172px;">
+      <svg aria-hidden="true" alt="" style="width: 172px; height: 172px">
         <use xlink:href="assets/svgs/music.svg#svg"></use>
       </svg>
     </div>
@@ -91,7 +86,10 @@
 
 <section class="max-w-screen-xl mx-auto my-12 px-4 md:px-8">
   <h2 class="ccq-section-heading">Quiz Awards</h2>
-  <div class="trophy-containers mt-12 mb-8 mx-auto text-center" data-aos="fade-up">
+  <div
+    class="trophy-containers mt-12 mb-8 mx-auto text-center"
+    data-aos="fade-up"
+  >
     <div class="trophy-container" id="gold">
       <img
         class="trophy"
@@ -166,65 +164,21 @@
       </li>
 
       <li class="mb-4" data-aos="fade-up">
+        Compete with other participants
+        <span class="font-bold">in 3 rounds</span>.
+      </li>
+      <li class="mb-4" data-aos="fade-up">
         <span class="font-bold">Score 50% and above </span>in the first round to
         progress to the second round.
       </li>
       <li class="mb-4" data-aos="fade-up">
-        <span class="font-bold">Top 5 participants </span>(champions) in the
-        second round progress to the final round.
+        <span class="font-bold">Top 5 participants </span>(champions) of the
+        second round's leaderboard progress to the final round.
       </li>
       <li class="mb-4" data-aos="fade-up">
         Champions <span class="font-bold">compete on stage</span> during the
         Christmas Cantata for winners to emerge.
       </li>
     </ul>
-  </div>
-</section>
-
-<section class="max-w-screen-md mx-auto my-12 px-4 md:px-8">
-  <h2 class="ccq-section-heading">Registration</h2>
-  <div class="pl-8">
-    <ul class="list-disc list-outside text-2xl max-w-screen-md mx-auto">
-      <li class="mb-4" data-aos="fade-up">
-        Register for the Christmas Cantata Quiz for
-        <span class="font-bold">₦500</span> only.
-      </li>
-      <li class="mb-4" data-aos="fade-up">
-        To register, send your full name via
-        <a
-          href="https://api.whatsapp.com/send?phone=2347033777385&text=Hi%20Obum.%0D%0AI%20came%20from%20the%20Christmas%20Cantata%20Quiz%20website.%0D%0AI%20want%20to%20register%20for%20the%20quiz.%0D%0AMy%20full%20name%20is%20"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="underline"
-        >
-          Whatsapp to Obum.</a
-        >
-      </li>
-    </ul>
-    <p class="text-center mt-8" data-aos="fade-up">
-      <a
-        mat-raised-button
-        href="https://api.whatsapp.com/send?phone=2347033777385&text=Hi%20Obum.%0D%0AI%20came%20from%20the%20Christmas%20Cantata%20Quiz%20website.%0D%0AI%20want%20to%20register%20for%20the%20quiz.%0D%0AMy%20full%20name%20is%20"
-        color="primary"
-        target="_blank"
-        rel="noopener noreferrer"
-        id="register-button"
-        >
-        <span>Register</span>
-        <svg
-          aria-hidden="true"
-          alt=""
-          style="
-            fill: white;
-            display: inline-block;
-            margin-left: 10px;
-            width: 1.25rem;
-            height: 1.25rem;
-          "
-        >
-          <use xlink:href="assets/svgs/whatsapp.svg#svg"></use>
-        </svg>
-      </a>
-    </p>
   </div>
 </section>

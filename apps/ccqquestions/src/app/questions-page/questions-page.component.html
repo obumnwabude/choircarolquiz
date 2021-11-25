@@ -1,58 +1,60 @@
-<div id="app-container">
-  <mat-toolbar>
-    <span>Choir Quiz Questions</span>
-    <span class="spacer"></span>
-    <button
-      mat-ripple
-      mat-raised-button
-      (click)="signOut()"
-      aria-label="Sign Out"
-    >
-      <span>Sign Out</span>
-    </button>
-  </mat-toolbar>
-
-  <main>
-    <pagination-controls
-      class="ccq-pagination"
-      (pageChange)="changePage($event)"
-    ></pagination-controls>
-
-    <div>
-      <button mat-button (click)="accordion.openAll()">Expand All</button>
-      <button mat-button (click)="accordion.closeAll()">Collapse All</button>
-    </div>
-
-    <mat-accordion multi>
-      <mat-expansion-panel
-        *ngFor="
-          let question of questions.reverse()
-            | paginate
-              : {
-                  itemsPerPage: maxQPP,
-                  currentPage: pageNumber,
-                  totalItems: questionCount
-                };
-          first as isFirst
-        "
-        [expanded]="isFirst"
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <mat-toolbar class="mat-elevation-z3">
+      <span>Choir Quiz Questions</span>
+      <span class="spacer"></span>
+      <button
+        mat-ripple
+        mat-raised-button
+        (click)="signOut()"
+        aria-label="Sign Out"
       >
-        <mat-expansion-panel-header>
-          <mat-panel-title> Question {{ question.index }} </mat-panel-title>
-        </mat-expansion-panel-header>
+        <span>Sign Out</span>
+      </button>
+    </mat-toolbar>
 
-        <ccq-question-form
-          [question]="question"
-          (questionChange)="firestore.saveQuestion($event)"
+    <main>
+      <pagination-controls
+        class="ccq-pagination"
+        (pageChange)="changePage($event)"
+      ></pagination-controls>
+
+      <div>
+        <button mat-button (click)="accordion.openAll()">Expand All</button>
+        <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+      </div>
+
+      <mat-accordion multi>
+        <mat-expansion-panel
+          *ngFor="
+            let question of questions.reverse()
+              | paginate
+                : {
+                    itemsPerPage: maxQPP,
+                    currentPage: pageNumber,
+                    totalItems: questionCount
+                  };
+            first as isFirst
+          "
+          [expanded]="isFirst"
         >
-        </ccq-question-form>
-      </mat-expansion-panel>
-    </mat-accordion>
+          <mat-expansion-panel-header>
+            <mat-panel-title> Question {{ question.index }} </mat-panel-title>
+          </mat-expansion-panel-header>
 
-    <mat-fab-menu
-      [fabButtons]="fabButtons"
-      (onFabMenuItemSelected)="fabAction($event)"
-    >
-    </mat-fab-menu>
-  </main>
-</div>
+          <ccq-question-form
+            [question]="question"
+            (questionChange)="firestore.saveQuestion($event)"
+          >
+          </ccq-question-form>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-fab-menu
+        [fabButtons]="fabButtons"
+        (onFabMenuItemSelected)="fabAction($event)"
+      >
+      </mat-fab-menu>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

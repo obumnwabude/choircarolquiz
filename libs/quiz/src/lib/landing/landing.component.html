@@ -1,0 +1,127 @@
+<section class="max-w-screen-xl mx-auto my-12 px-4 md:px-8">
+  <h2 class="ccq-section-heading" id="round-one-heading">Round One</h2>
+  <div class="pl-8">
+    <ul class="about-round list-disc list-outside text-2xl mx-auto">
+      <li class="mb-4" data-aos="fade-up">20 Multiple Choice Questions.</li>
+      <li class="mb-4" data-aos="fade-up">20 seconds per question.</li>
+      <li class="mb-4" data-aos="fade-up">Only 1 attempt.</li>
+      <li class="mb-4" data-aos="fade-up">
+        Faster answering speed increases your points.
+      </li>
+      <li class="mb-4" data-aos="fade-up">Score above 50% to pass.</li>
+      <li class="mb-4" data-aos="fade-up">
+        Please have good internet connectivity.
+      </li>
+    </ul>
+  </div>
+</section>
+
+<p class="text-center mb-40">
+  <button
+    mat-stroked-button
+    class="leaderboard"
+    color="primary"
+    routerLink="/quiz/leaderboards"
+  >
+    View Leaderboard
+  </button>
+  <!-- <button
+    mat-raised-button
+    color="primary"
+    (click)="startRound(1)"
+    *ngIf="round1Eligible"
+  >
+    Start Round 1
+  </button> -->
+</p>
+
+<mat-divider></mat-divider>
+
+<div
+  id="round-2"
+  *ngIf="
+    (round1Eligible && !round2Eligible) || (!round1Eligible && round2Eligible)
+  "
+>
+  <section class="max-w-screen-xl mx-auto my-12 px-4 md:px-8">
+    <h2 class="ccq-section-heading">Round Two</h2>
+    <div class="pl-8">
+      <ul class="about-round list-disc list-outside text-2xl mx-auto">
+        <li class="mb-4">Holds after round one.</li>
+        <li class="mb-4">30 Multiple Choice Questions.</li>
+        <li class="mb-4">20 seconds per question.</li>
+        <li class="mb-4">Only 1 attempt.</li>
+        <li class="mb-4">Faster answering speed increases your points.</li>
+        <li class="mb-4">Top 5 in leaderboard progress to round three.</li>
+        <li class="mb-4">Please have good internet connectivity.</li>
+      </ul>
+    </div>
+  </section>
+
+  <p class="text-center mb-40">
+    <button
+      mat-stroked-button
+      class="leaderboard"
+      color="primary"
+      routerLink="/quiz/leaderboards"
+      disabled
+    >
+      View Leaderboard
+    </button>
+    <button mat-raised-button color="primary" (click)="startRound(2)">
+      Start Round 2
+    </button>
+  </p>
+</div>
+
+<mat-divider></mat-divider>
+
+<section class="max-w-screen-md mx-auto my-12 px-4 md:px-8">
+  <h2 class="ccq-section-heading">Round Three</h2>
+  <div class="ccq-round-three mb-16">
+    <div class="ccq-round-three-icon">
+      <svg aria-hidden="true" alt="" style="width: 180px">
+        <use xlink:href="assets/svgs/stage.svg#svg"></use>
+      </svg>
+    </div>
+    <div class="text-center md:text-left ccq-round-three-body">
+      <h3 class="text-3xl mt-2 md:font-bold">How</h3>
+      <p class="text-xl md:text-2xl">Orally, On Stage, among champions.</p>
+    </div>
+  </div>
+  <div class="ccq-round-three mb-16">
+    <div class="ccq-round-three-icon">
+      <svg aria-hidden="true" alt="" style="width: 96px; height: 96px">
+        <use xlink:href="assets/svgs/calendar.svg#svg"></use>
+      </svg>
+    </div>
+    <div class="text-center md:text-left ccq-round-three-body">
+      <h3 class="text-3xl mt-2 md:font-bold">When</h3>
+      <p class="text-xl md:text-2xl">
+        During the Christmas Cantata.<br />On Sat. 20th Nov. 2021.
+      </p>
+    </div>
+  </div>
+  <div class="ccq-round-three mb-16">
+    <div class="ccq-round-three-icon">
+      <svg aria-hidden="true" alt="" style="width: 96px; height: 96px">
+        <use xlink:href="assets/svgs/location.svg#svg"></use>
+      </svg>
+    </div>
+    <div class="text-center md:text-left ccq-round-three-body">
+      <h3 class="text-3xl mt-2 md:font-bold">Where</h3>
+      <p class="text-xl md:text-2xl">Theatre Arts Auditorium, AE-FUNAI.</p>
+    </div>
+  </div>
+  <div class="ccq-round-three mb-16">
+    <div class="ccq-round-three-icon">
+      <svg aria-hidden="true" alt="" style="width: 144px; height: 144px">
+        <use xlink:href="assets/svgs/winners.svg#svg"></use>
+      </svg>
+    </div>
+    <div class="text-center md:text-left ccq-round-three-body">
+      <h3 class="text-3xl mt-2 md:font-bold">Awards</h3>
+      <p class="text-xl md:text-2xl">On Stage, During the Event.</p>
+    </div>
+  </div>
+</section>

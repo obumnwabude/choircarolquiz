@@ -1,3 +1,7 @@
+.hidden {
+  display: none !important;
+}
+
 mat-sidenav-content {
   max-width: 1400px;
   margin: 0 auto;
@@ -9,11 +13,8 @@ mat-sidenav-content {
 @media (min-width: 1400px) {
   mat-sidenav-content {
     margin: 0 auto;
-    border: 5px solid #000;
-  }
-
-  ::ng-deep.dark_mode mat-sidenav-content {
-    border-color: #fff;
+    border: 5px solid;
+    border-top: none;
   }
 }
 
@@ -24,12 +25,45 @@ mat-toolbar.header {
   margin: 0 auto;
 }
 
+@media (max-width: 400px) {
+  #nav-cantata-text {
+    display: none;
+  }
+}
+
 main {
-  padding-top: 72px;
-  padding-bottom: 96px;
+  padding-top: 56px;
+  padding-bottom: 64px;
   flex: 1 0 auto;
+}
+
+@media (min-width: 600px) {
+  main {
+    padding-top: 64px;
+  }
 }
 
 mat-toolbar.footer {
   flex-shrink: 0;
+}
+
+@media (max-width: 767.99px) {
+  .ccq-desktop-nav-item {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .ccq-menu-button,
+  mat-sidenav {
+    display: none;
+  }
+
+  .ccq-desktop-nav-item {
+    display: unset;
+  }
+
+  .ccq-desktop-nav-item {
+    margin-right: 12px;
+  }
 }

@@ -5,7 +5,7 @@
 @include mat-core();
 
 $ccq-primary: mat-palette($mat-red);
-$ccq-accent: mat-palette($mat-red, A200, A100, A400);
+$ccq-accent: mat-palette($mat-blue, A200, A100, A400);
 
 .light_mode {
   @include angular-material-theme(mat-light-theme($ccq-primary, $ccq-accent));
@@ -70,7 +70,7 @@ body {
   font-size: 0.7em;
   text-indent: 0px;
   color: #fff;
-  line-height: 12px;
+  line-height: 12.5px;
   z-index: 9;
 }
 
@@ -84,3 +84,13 @@ body {
   color: white;
 }
 
+.snackbar-error {
+  color: #fff;
+}
+
+.snackbar-error::before {
+  font-family: 'Material Icons';
+  content: '\e000';
+  color: #fc9494;
+  margin-right: 8px;
+}
